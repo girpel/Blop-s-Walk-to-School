@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://khyd5m0ypqt3"]
+
+[ext_resource type="Shader" path="res://shaders/foilage/foilage.gdshader" id="1_kebyi"]
+[ext_resource type="Script" path="res://scripts/foilage/foilage.gd" id="2_8bs0q"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r4njv"]
+resource_local_to_scene = true
+seed = -1919955082
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tk6ft"]
+resource_local_to_scene = true
+width = 32
+height = 16
+seamless = true
+seamless_blend_skirt = 0.4
+noise = SubResource("FastNoiseLite_r4njv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1a1ek"]
+resource_local_to_scene = true
+shader = ExtResource("1_kebyi")
+shader_parameter/stretch_left = false
+shader_parameter/stretch_right = false
+shader_parameter/wind_strength = 9.0
+shader_parameter/wind_displacement = 1.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_tk6ft")
+
+[node name="Foilage" type="Sprite2D"]
+material = SubResource("ShaderMaterial_1a1ek")
+script = ExtResource("2_8bs0q")

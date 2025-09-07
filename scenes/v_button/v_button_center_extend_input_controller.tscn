@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bq1fyx5a7865p"]
+
+[ext_resource type="PackedScene" uid="uid://dt87hu0h8eqn6" path="res://scenes/v_button/v_button_center_extend_input.tscn" id="1_n0rht"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_input/texture_rect_controller.gd" id="2_ba1du"]
+
+[node name="VButtonCenterExtendInputController" instance=ExtResource("1_n0rht")]
+
+[node name="Button" parent="." index="0"]
+custom_minimum_size = Vector2(142, 22)
+
+[node name="InputTexture" parent="Button/HBoxContainer/HBoxContainer" index="2"]
+custom_minimum_size = Vector2(124, 0)
+
+[node name="TextureRect" parent="Button/HBoxContainer/HBoxContainer/InputTexture" index="0"]
+script = ExtResource("2_ba1du")
+inputs_directory_paths = Array[String](["res://textures/v_button/v_button_extend_center_input/controller/general", "res://textures/v_button/v_button_extend_center_input/controller/xbox", "res://textures/v_button/v_button_extend_center_input/controller/dualshock", "res://textures/v_button/v_button_extend_center_input/controller/dualsense", "res://textures/v_button/v_button_extend_center_input/controller/switch", "res://textures/v_button/v_button_extend_center_input/controller/steam", "res://textures/v_button/v_button_extend_center_input/controller/luna"])
+
+[node name="InputText" parent="Button/HBoxContainer/HBoxContainer" index="3"]
+text = "PRESS BUTTON"

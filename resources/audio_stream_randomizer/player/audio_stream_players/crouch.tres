@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://dn3vk1ee0ruf8"]
+
+[ext_resource type="AudioStream" uid="uid://ci51kcw0bds1d" path="res://streams/player/audio_stream_players/crouch.wav" id="1_1x7y8"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_1x7y8")
+stream_0/weight = 1.0

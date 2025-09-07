@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://fueam5jlhlbt"]
+
+[ext_resource type="PackedScene" uid="uid://c2xmesjxijvey" path="res://scenes/v_button/v_button_center_extend.tscn" id="1_1ex71"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_select/v_button_center_extend_select.gd" id="2_1qasm"]
+[ext_resource type="Texture2D" uid="uid://iebn6m822osv" path="res://textures/v_button/select_button.png" id="3_ga1dr"]
+[ext_resource type="Texture2D" uid="uid://dtyqtvf7g78l" path="res://textures/v_button/select_button_disabled.png" id="4_k758o"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_select/texture_button_select.gd" id="5_bph4c"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_select/selection.gd" id="6_tvgip"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_5efgb"]
+action = &"ui_left"
+
+[sub_resource type="Shortcut" id="Shortcut_on45i"]
+events = [SubResource("InputEventAction_5efgb")]
+
+[sub_resource type="InputEventAction" id="InputEventAction_17a5b"]
+action = &"ui_right"
+
+[sub_resource type="Shortcut" id="Shortcut_k1uct"]
+events = [SubResource("InputEventAction_17a5b")]
+
+[node name="VButtonCenterExtendSelect" instance=ExtResource("1_1ex71")]
+script = ExtResource("2_1qasm")
+selections = Array[String]([])
+selection_index_start = 0
+selection_custom_minimum_size_x = 0
+selection_wrap = false
+
+[node name="Button" parent="." index="0"]
+custom_minimum_size = Vector2(42, 22)
+disabled = true
+
+[node name="ButtonSelect" type="HBoxContainer" parent="Button/HBoxContainer/HBoxContainer" index="2"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureButtonLeft" type="TextureButton" parent="Button/HBoxContainer/HBoxContainer/ButtonSelect" index="0" node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+shortcut_context = NodePath("../../../..")
+shortcut = SubResource("Shortcut_on45i")
+shortcut_in_tooltip = false
+texture_normal = ExtResource("3_ga1dr")
+texture_disabled = ExtResource("4_k758o")
+stretch_mode = 5
+flip_h = true
+script = ExtResource("5_bph4c")
+change_tween_offset_mult = -1
+
+[node name="Selection" type="Button" parent="Button/HBoxContainer/HBoxContainer/ButtonSelect" index="1"]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+disabled = true
+button_mask = 0
+script = ExtResource("6_tvgip")
+
+[node name="TextureButtonRight" type="TextureButton" parent="Button/HBoxContainer/HBoxContainer/ButtonSelect" index="2" node_paths=PackedStringArray("shortcut_context")]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 1
+shortcut_context = NodePath("../../../..")
+shortcut = SubResource("Shortcut_k1uct")
+shortcut_in_tooltip = false
+texture_normal = ExtResource("3_ga1dr")
+texture_disabled = ExtResource("4_k758o")
+stretch_mode = 5
+script = ExtResource("5_bph4c")
+change_tween_offset_mult = 1
+
+[connection signal="visibility_changed" from="Button/HBoxContainer/HBoxContainer/ButtonSelect/TextureButtonLeft" to="Button/HBoxContainer/HBoxContainer/ButtonSelect/TextureButtonLeft" method="_on_visibility_changed" flags=6]
+[connection signal="visibility_changed" from="Button/HBoxContainer/HBoxContainer/ButtonSelect/Selection" to="Button/HBoxContainer/HBoxContainer/ButtonSelect/Selection" method="_on_visibility_changed" flags=6]
+[connection signal="visibility_changed" from="Button/HBoxContainer/HBoxContainer/ButtonSelect/TextureButtonRight" to="Button/HBoxContainer/HBoxContainer/ButtonSelect/TextureButtonRight" method="_on_visibility_changed" flags=6]

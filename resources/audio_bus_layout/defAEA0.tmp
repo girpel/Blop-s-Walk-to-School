@@ -1,0 +1,70 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://bhm4phvachaic"]
+
+[sub_resource type="GDScript" id="GDScript_enlbn"]
+script/source = "extends AudioEffectFilter
+
+const TWEEN_DURATION := 0.05
+const CUTOFF_HZ_MAX := 20500
+
+var cutoff_hz_initial := cutoff_hz
+
+func tween_create(final_val: float) -> Tween:
+	
+	var tween = Globals.tree.create_tween()
+	tween.tween_property(self, \"cutoff_hz\", final_val, TWEEN_DURATION)
+	
+	return tween
+
+func tween_in() -> void:
+	return tween_create(cutoff_hz_initial)
+
+func tween_out() -> void:
+	return tween_create(CUTOFF_HZ_MAX)
+"
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_i8vvg"]
+resource_name = "LowPassFilter"
+cutoff_hz = 1750.0
+resonance = 0.1
+script = SubResource("GDScript_enlbn")
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ogo01"]
+resource_name = "Reverb"
+room_size = 0.1
+wet = 0.4
+
+[resource]
+bus/1/name = &"Water"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = true
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_i8vvg")
+bus/1/effect/0/enabled = true
+bus/1/effect/1/effect = SubResource("AudioEffectReverb_ogo01")
+bus/1/effect/1/enabled = true
+bus/2/name = &"Sound Effects"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Water"
+bus/3/name = &"Ambience"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Water"
+bus/4/name = &"Ambience Outside"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Ambience"
+bus/5/name = &"Ambience Inside"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Ambience"

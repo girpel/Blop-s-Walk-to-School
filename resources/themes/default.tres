@@ -1,0 +1,63 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://ddlm8qsfiblqo"]
+
+[ext_resource type="Texture2D" uid="uid://d4faxtff07hny" path="res://textures/themes/default/v_scroll_bar/grabber.png" id="1_wsmty"]
+[ext_resource type="Texture2D" uid="uid://b8874hpa0usfy" path="res://textures/themes/default/v_scroll_bar/scroll.png" id="2_ig4gt"]
+[ext_resource type="FontFile" uid="uid://v0gimnmunewc" path="res://fonts/pixel_font.ttf" id="51_lwx5w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fr6ip"]
+content_margin_left = 2.0
+content_margin_top = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gbi5p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k55sh"]
+content_margin_left = 2.0
+content_margin_top = 11.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cb7dc"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g7rcj"]
+texture = ExtResource("1_wsmty")
+texture_margin_left = 6.0
+texture_margin_top = 8.0
+texture_margin_right = 6.0
+texture_margin_bottom = 8.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 0, 12, 12)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8bu7u"]
+texture = ExtResource("2_ig4gt")
+texture_margin_left = 6.0
+texture_margin_top = 4.0
+texture_margin_right = 6.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 12, 12)
+
+[resource]
+default_font = ExtResource("51_lwx5w")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_disabled_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 16
+Button/styles/disabled = SubResource("StyleBoxEmpty_fr6ip")
+Button/styles/focus = SubResource("StyleBoxEmpty_gbi5p")
+Button/styles/hover = SubResource("StyleBoxEmpty_fr6ip")
+Button/styles/normal = SubResource("StyleBoxEmpty_fr6ip")
+Button/styles/pressed = SubResource("StyleBoxEmpty_fr6ip")
+Label/constants/line_spacing = 5
+Label/styles/normal = SubResource("StyleBoxEmpty_k55sh")
+Panel/styles/panel = SubResource("StyleBoxFlat_cb7dc")
+VScrollBar/styles/grabber = SubResource("StyleBoxTexture_g7rcj")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxTexture_g7rcj")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxTexture_g7rcj")
+VScrollBar/styles/scroll = SubResource("StyleBoxTexture_8bu7u")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxTexture_8bu7u")

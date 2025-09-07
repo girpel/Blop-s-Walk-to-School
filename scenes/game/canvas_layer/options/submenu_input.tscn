@@ -1,0 +1,109 @@
+[gd_scene load_steps=10 format=3 uid="uid://q1a3yrrt7yeo"]
+
+[ext_resource type="Script" path="res://scripts/v_button/v_container/v_scroll_container.gd" id="1_3jc4t"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/options/submenu_input.gd" id="2_uyeqa"]
+[ext_resource type="Script" path="res://scripts/v_button/v_container/v_buttons_container.gd" id="3_eas0c"]
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="5_ieekr"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/options/reset_defaults.gd" id="6_8s70n"]
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="6_014an"]
+[ext_resource type="AudioStream" uid="uid://cl7x65rejrxki" path="res://streams/game/canvas_layer/stream_pressed_ui_back.wav" id="7_qpic8"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yg7as"]
+action = &"ui_back"
+
+[sub_resource type="Shortcut" id="Shortcut_sjnd1"]
+events = [SubResource("InputEventAction_yg7as")]
+
+[node name="SubmenuInput" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_3jc4t")
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -71.0
+offset_top = 16.0
+offset_right = 71.0
+offset_bottom = 172.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 13
+alignment = 1
+script = ExtResource("2_uyeqa")
+v_buttons_container_0_path = NodePath("VButtons/Gameplay/VButtonsContainer")
+
+[node name="Title" type="TextureRect" parent="Menu"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtons" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Gameplay" type="VBoxContainer" parent="Menu/VButtons"]
+layout_mode = 2
+
+[node name="Label" type="Button" parent="Menu/VButtons/Gameplay"]
+layout_mode = 2
+focus_mode = 0
+disabled = true
+button_mask = 0
+text = "GAMEPLAY"
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Menu/VButtons/Gameplay"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("3_eas0c")
+
+[node name="UI" type="VBoxContainer" parent="Menu/VButtons"]
+layout_mode = 2
+
+[node name="Label" type="Button" parent="Menu/VButtons/UI"]
+layout_mode = 2
+focus_mode = 0
+disabled = true
+button_mask = 0
+text = "USER INTERFACE"
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Menu/VButtons/UI"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("3_eas0c")
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Menu/VButtons"]
+layout_mode = 2
+theme_override_constants/separation = 2
+script = ExtResource("3_eas0c")
+
+[node name="ResetDefaults" parent="Menu/VButtons/VButtonsContainer" instance=ExtResource("5_ieekr")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("6_014an")
+script = ExtResource("6_8s70n")
+v_buttons_containers_paths = Array[NodePath]([NodePath("../../Gameplay/VButtonsContainer"), NodePath("../../UI/VButtonsContainer")])
+text = "RESET DEFAULTS"
+
+[node name="Back" parent="Menu/VButtons/VButtonsContainer" instance=ExtResource("5_ieekr")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("6_014an")
+text = "BACK"
+shortcut = SubResource("Shortcut_sjnd1")
+stream_pressed = ExtResource("7_qpic8")
+
+[connection signal="pressed" from="Menu/VButtons/VButtonsContainer/Back" to="Menu" method="_on_back_pressed"]

@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://ue50funjy677"]
+
+[ext_resource type="AudioStream" uid="uid://bbw84lqgu36d5" path="res://streams/v_button/rigid_body_2d/science_ball/collision.wav" id="1_gauwb"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_gauwb")
+stream_0/weight = 1.0

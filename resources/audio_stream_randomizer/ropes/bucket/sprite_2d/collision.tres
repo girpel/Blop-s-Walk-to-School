@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://dtkjr4omc3bue"]
+
+[ext_resource type="AudioStream" uid="uid://dcsbqbe87j66e" path="res://streams/ropes/bucket/sprite_2d/collision/0.wav" id="1_46l1i"]
+[ext_resource type="AudioStream" uid="uid://ep53r1r8tinu" path="res://streams/ropes/bucket/sprite_2d/collision/1.wav" id="2_usnlx"]
+[ext_resource type="AudioStream" uid="uid://dxct8xjfma3ot" path="res://streams/ropes/bucket/sprite_2d/collision/2.wav" id="3_ux2d1"]
+[ext_resource type="AudioStream" uid="uid://1rur4aibqo2" path="res://streams/ropes/bucket/sprite_2d/collision/3.wav" id="4_6c8cg"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_46l1i")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_usnlx")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_ux2d1")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_6c8cg")
+stream_3/weight = 1.0

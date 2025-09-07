@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt87hu0h8eqn6"]
+
+[ext_resource type="PackedScene" uid="uid://c2xmesjxijvey" path="res://scenes/v_button/v_button_center_extend.tscn" id="1_7jxov"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_input/v_button_center_extend_input.gd" id="2_874ai"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_input/texture_rect.gd" id="2_en000"]
+
+[node name="VButtonCenterExtendInput" instance=ExtResource("1_7jxov")]
+script = ExtResource("2_874ai")
+action = &""
+
+[node name="Button" parent="." index="0"]
+custom_minimum_size = Vector2(18, 22)
+
+[node name="InputTexture" type="Control" parent="Button/HBoxContainer/HBoxContainer" index="2"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer/HBoxContainer/InputTexture" index="0"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -20.0
+offset_top = 4.0
+offset_right = -2.0
+offset_bottom = 18.0
+grow_horizontal = 0
+size_flags_horizontal = 0
+expand_mode = 3
+stretch_mode = 5
+script = ExtResource("2_en000")
+
+[node name="InputText" type="Button" parent="Button/HBoxContainer/HBoxContainer" index="3"]
+visible = false
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+disabled = true
+
+[node name="Space" parent="Button/HBoxContainer" index="1"]
+visible = false
+
+[connection signal="pressed" from="Button" to="Button/HBoxContainer/HBoxContainer/InputTexture/TextureRect" method="_on_button_pressed"]
+[connection signal="input_active" from="Button/HBoxContainer/HBoxContainer/InputTexture/TextureRect" to="Button/HBoxContainer/HBoxContainer/InputText" method="show"]
+[connection signal="input_active" from="Button/HBoxContainer/HBoxContainer/InputTexture/TextureRect" to="Button/HBoxContainer/HBoxContainer/InputTexture" method="set_visible" binds= [false]]
+[connection signal="input_inactive" from="Button/HBoxContainer/HBoxContainer/InputTexture/TextureRect" to="Button/HBoxContainer/HBoxContainer/InputText" method="hide"]
+[connection signal="input_inactive" from="Button/HBoxContainer/HBoxContainer/InputTexture/TextureRect" to="Button/HBoxContainer/HBoxContainer/InputTexture" method="set_visible" binds= [true]]

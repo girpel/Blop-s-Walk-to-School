@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://187djkvuhdf6"]
+
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="1_1yumj"]
+[ext_resource type="Script" path="res://scripts/input_prompt/input_prompt_ui.gd" id="2_clksd"]
+[ext_resource type="Script" path="res://scripts/input_prompt/texture_rect.gd" id="3_jfp0k"]
+
+[node name="InputPromptUI" type="HBoxContainer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -25.0
+offset_right = 10.0
+offset_bottom = -6.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("1_1yumj")
+theme_override_constants/separation = 3
+script = ExtResource("2_clksd")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+process_mode = 3
+layout_mode = 2
+size_flags_vertical = 8
+script = ExtResource("3_jfp0k")
+
+[connection signal="texture_changed" from="MarginContainer/TextureRect" to="." method="emit_signal" binds= ["size_changed"]]
+[connection signal="texture_ready" from="MarginContainer/TextureRect" to="." method="emit_signal" binds= ["size_ready"]]

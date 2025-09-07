@@ -1,0 +1,1702 @@
+[gd_scene load_steps=117 format=3 uid="uid://dv0il4mt5v8h1"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_4uk46"]
+[ext_resource type="Texture2D" uid="uid://bnsvw7dudq3ig" path="res://textures/player/sprite_2d.png" id="1_ftd55"]
+[ext_resource type="Texture2D" uid="uid://babnmd0me3aq4" path="res://textures/player/exclamation_mark.png" id="2_r05yh"]
+[ext_resource type="Shader" path="res://shaders/player/sprite_2d.gdshader" id="2_rch6m"]
+[ext_resource type="Script" path="res://scripts/player/camera_2d.gd" id="2_ttmdb"]
+[ext_resource type="Script" path="res://scripts/player/sprite_2d.gd" id="3_51rdd"]
+[ext_resource type="Script" path="res://scripts/player/animation_tree.gd" id="4_l58kd"]
+[ext_resource type="Script" path="res://scripts/base/state_machine.gd" id="5_1f2i6"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_stand_idle.gd" id="5_mrikd"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_stand_move.gd" id="6_8jtv1"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_crouch_idle.gd" id="7_580jx"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_crouch_move.gd" id="8_7m1tl"]
+[ext_resource type="Script" path="res://scripts/player/audio_stream_player_2ds.gd" id="8_ke7ed"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_jump.gd" id="10_ap42o"]
+[ext_resource type="Script" path="res://scripts/base/audio_streams_player_2d.gd" id="10_iuv08"]
+[ext_resource type="Script" path="res://scripts/player/timers.gd" id="10_wp438"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_fall.gd" id="11_yjst5"]
+[ext_resource type="Script" path="res://scripts/base/gpu_particles_2d_instance.gd" id="15_482uw"]
+[ext_resource type="Script" path="res://scripts/player/gpu_particles_2ds.gd" id="15_empkt"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_wall_slide_up.gd" id="15_xyus8"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_wall_slide_down.gd" id="16_lya3e"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_wall_jump_side.gd" id="17_ugl4n"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_sit.gd" id="18_qdmqf"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_wall_jump_up.gd" id="18_t4dvw"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_interact.gd" id="19_ugnho"]
+[ext_resource type="Texture2D" uid="uid://datiju4iey5vs" path="res://textures/water/bubble.png" id="23_tw0jk"]
+[ext_resource type="Script" path="res://scripts/player/state_machine/state_phone.gd" id="25_pa5fl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrjnm"]
+shader = ExtResource("2_rch6m")
+shader_parameter/scale = Vector2(1, 1)
+shader_parameter/offset = null
+
+[sub_resource type="Animation" id="Animation_bf4lj"]
+resource_name = "crouch_idle"
+length = 1.70834
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [56, 97]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1, 42]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 4), Vector2(-1, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(13, 9), Vector2(13, 9)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_xrfa6"]
+resource_name = "crouch_move"
+length = 0.541671
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [98, 111]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [43, 56]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 4), Vector2(-1, 4)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(13, 9), Vector2(13, 9)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 2), Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_vuo2e"]
+resource_name = "fall"
+length = 0.208338
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.208333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [118, 123]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_n6mmt"]
+resource_name = "jump"
+length = 0.208338
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.208333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [112, 117]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_vn1rh"]
+resource_name = "phone"
+length = 1.70834
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [212, 253]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_uu7k2"]
+resource_name = "phone_transition"
+length = 0.458338
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.458334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [200, 211]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:shape:size")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+
+[sub_resource type="Animation" id="Animation_58fy7"]
+resource_name = "sit"
+length = 2.45834
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.45834),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [140, 199]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.45834),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [61, 120]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 3.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13, 10)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_i838t"]
+resource_name = "sit_transition"
+length = 0.125004
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [136, 139]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-0.5, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.125),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [57, 60]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1.5, 3)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(13, 11)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e0ckj"]
+resource_name = "stand_idle"
+length = 1.70834
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 41]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1, 42]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 2.5), Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(11, 12), Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.70833),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_piw4u"]
+resource_name = "stand_move"
+length = 0.541671
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [42, 55]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -1), Vector2(0, -1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [43, 56]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, 2.5), Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(11, 12), Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.541667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -1), Vector2(0, -1)]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AudioStreamPlayer2Ds/Move")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.291667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_k3chk"]
+resource_name = "wall_jump_up"
+length = 0.0833376
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [112, 114]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_sbp0q"]
+resource_name = "wall_slide_down"
+length = 0.208338
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.208333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [130, 135]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_vyw3j"]
+resource_name = "wall_slide_up"
+length = 0.208338
+loop_mode = 1
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.208333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [124, 129]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-2, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExclamationMark:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CollisionShape2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 2.5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CollisionShape2D:shape:size")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(11, 12)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExclamationMark:offset")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qsvk"]
+_data = {
+"crouch_idle": SubResource("Animation_bf4lj"),
+"crouch_move": SubResource("Animation_xrfa6"),
+"fall": SubResource("Animation_vuo2e"),
+"jump": SubResource("Animation_n6mmt"),
+"phone": SubResource("Animation_vn1rh"),
+"phone_transition": SubResource("Animation_uu7k2"),
+"sit": SubResource("Animation_58fy7"),
+"sit_transition": SubResource("Animation_i838t"),
+"stand_idle": SubResource("Animation_e0ckj"),
+"stand_move": SubResource("Animation_piw4u"),
+"wall_jump_up": SubResource("Animation_k3chk"),
+"wall_slide_down": SubResource("Animation_sbp0q"),
+"wall_slide_up": SubResource("Animation_vyw3j")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6t80y"]
+animation = &"crouch_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5myws"]
+animation = &"crouch_move"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ml0tl"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jqoh8"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xiu2d"]
+animation = &"stand_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sjxtk"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hcv1d"]
+animation = &"phone"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t8pwc"]
+animation = &"phone_transition"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lqfix"]
+animation = &"phone_transition"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qpblx"]
+animation = &"sit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ht47n"]
+animation = &"sit_transition"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i10op"]
+animation = &"stand_idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_28thn"]
+animation = &"stand_move"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yynqr"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_if0jy"]
+animation = &"wall_jump_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4sal8"]
+animation = &"wall_slide_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ib4p3"]
+animation = &"wall_slide_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_swlkm"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tb54l"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q0vd0"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5nr22"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7lgg5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wr1ra"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bwk67"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8n6kb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sm8l6"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b63u8"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8pktp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_neocp"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jlu0k"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_str7r"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wfrlq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h3af7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mb8wf"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u8pap"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_e7e32"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r2h5o"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1sxmm"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_03nex"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xgf2b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6bh0n"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tog7j"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7lysu"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_in82d"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_id06b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_urxxj"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iatfo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rth1f"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_71mi5"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dlbgk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rr5ri"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hfrxs"]
+states/End/position = Vector2(229, 112)
+states/Start/position = Vector2(229, 13)
+states/crouch_idle/node = SubResource("AnimationNodeAnimation_6t80y")
+states/crouch_idle/position = Vector2(410, 112)
+states/crouch_move/node = SubResource("AnimationNodeAnimation_5myws")
+states/crouch_move/position = Vector2(410, -116)
+states/default/node = SubResource("AnimationNodeStateMachine_ml0tl")
+states/default/position = Vector2(610, 57)
+states/fall/node = SubResource("AnimationNodeAnimation_jqoh8")
+states/fall/position = Vector2(610, -116)
+states/interact/node = SubResource("AnimationNodeAnimation_xiu2d")
+states/interact/position = Vector2(410, -59)
+states/jump/node = SubResource("AnimationNodeAnimation_sjxtk")
+states/jump/position = Vector2(532, -116)
+states/phone/node = SubResource("AnimationNodeAnimation_hcv1d")
+states/phone/position = Vector2(376, 196)
+states/phone_transition/node = SubResource("AnimationNodeAnimation_t8pwc")
+states/phone_transition/position = Vector2(229, 196)
+states/phone_transition_backwards/node = SubResource("AnimationNodeAnimation_lqfix")
+states/phone_transition_backwards/position = Vector2(572, 196)
+states/sit/node = SubResource("AnimationNodeAnimation_qpblx")
+states/sit/position = Vector2(972, 196)
+states/sit_transition/node = SubResource("AnimationNodeAnimation_ht47n")
+states/sit_transition/position = Vector2(816, 196)
+states/stand_idle/node = SubResource("AnimationNodeAnimation_i10op")
+states/stand_idle/position = Vector2(410, 13)
+states/stand_move/node = SubResource("AnimationNodeAnimation_28thn")
+states/stand_move/position = Vector2(229, -116)
+states/wall_jump_side/node = SubResource("AnimationNodeAnimation_yynqr")
+states/wall_jump_side/position = Vector2(1034, -116)
+states/wall_jump_up/node = SubResource("AnimationNodeAnimation_if0jy")
+states/wall_jump_up/position = Vector2(1183, -116)
+states/wall_slide_down/node = SubResource("AnimationNodeAnimation_4sal8")
+states/wall_slide_down/position = Vector2(873, -116)
+states/wall_slide_up/node = SubResource("AnimationNodeAnimation_ib4p3")
+states/wall_slide_up/position = Vector2(720, -116)
+transitions = ["stand_idle", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_swlkm"), "crouch_idle", "stand_idle", SubResource("AnimationNodeStateMachineTransition_tb54l"), "crouch_move", "stand_move", SubResource("AnimationNodeStateMachineTransition_q0vd0"), "stand_move", "crouch_move", SubResource("AnimationNodeStateMachineTransition_5nr22"), "Start", "stand_idle", SubResource("AnimationNodeStateMachineTransition_7lgg5"), "sit_transition", "sit", SubResource("AnimationNodeStateMachineTransition_wr1ra"), "wall_jump_side", "default", SubResource("AnimationNodeStateMachineTransition_bwk67"), "wall_slide_down", "default", SubResource("AnimationNodeStateMachineTransition_8n6kb"), "default", "wall_jump_side", SubResource("AnimationNodeStateMachineTransition_sm8l6"), "default", "wall_slide_down", SubResource("AnimationNodeStateMachineTransition_b63u8"), "wall_slide_up", "default", SubResource("AnimationNodeStateMachineTransition_8pktp"), "fall", "default", SubResource("AnimationNodeStateMachineTransition_neocp"), "default", "wall_slide_up", SubResource("AnimationNodeStateMachineTransition_jlu0k"), "default", "fall", SubResource("AnimationNodeStateMachineTransition_str7r"), "jump", "default", SubResource("AnimationNodeStateMachineTransition_wfrlq"), "default", "jump", SubResource("AnimationNodeStateMachineTransition_h3af7"), "crouch_move", "default", SubResource("AnimationNodeStateMachineTransition_mb8wf"), "default", "crouch_move", SubResource("AnimationNodeStateMachineTransition_u8pap"), "default", "stand_move", SubResource("AnimationNodeStateMachineTransition_e7e32"), "default", "stand_idle", SubResource("AnimationNodeStateMachineTransition_r2h5o"), "crouch_idle", "default", SubResource("AnimationNodeStateMachineTransition_1sxmm"), "default", "crouch_idle", SubResource("AnimationNodeStateMachineTransition_03nex"), "default", "sit_transition", SubResource("AnimationNodeStateMachineTransition_xgf2b"), "default", "phone_transition", SubResource("AnimationNodeStateMachineTransition_6bh0n"), "phone_transition", "phone", SubResource("AnimationNodeStateMachineTransition_tog7j"), "phone", "phone_transition_backwards", SubResource("AnimationNodeStateMachineTransition_7lysu"), "phone_transition_backwards", "default", SubResource("AnimationNodeStateMachineTransition_in82d"), "sit", "default", SubResource("AnimationNodeStateMachineTransition_id06b"), "wall_jump_up", "default", SubResource("AnimationNodeStateMachineTransition_urxxj"), "default", "wall_jump_up", SubResource("AnimationNodeStateMachineTransition_iatfo"), "interact", "stand_idle", SubResource("AnimationNodeStateMachineTransition_rth1f"), "stand_idle", "interact", SubResource("AnimationNodeStateMachineTransition_71mi5"), "stand_idle", "default", SubResource("AnimationNodeStateMachineTransition_dlbgk"), "stand_move", "default", SubResource("AnimationNodeStateMachineTransition_rr5ri")]
+graph_offset = Vector2(-32.123, -124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wf61"]
+size = Vector2(11, 12)
+
+[sub_resource type="Curve" id="Curve_te3ma"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ra08o"]
+curve = SubResource("Curve_te3ma")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bxk24"]
+lifetime_randomness = 0.1
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 90.0
+flatness = 1.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 20.0
+damping_max = 30.0
+scale_min = 2.5
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_ra08o")
+turbulence_noise_strength = 8.65
+turbulence_noise_speed_random = 4.76
+turbulence_influence_min = 0.44
+turbulence_influence_max = 0.52
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_w8rwr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yihxr"]
+curve = SubResource("Curve_w8rwr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nbt8v"]
+lifetime_randomness = 0.2
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 90.0
+flatness = 1.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 15.0
+damping_max = 30.0
+scale_min = 2.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_yihxr")
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_1rn11"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3qu28"]
+curve = SubResource("Curve_1rn11")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xfv1a"]
+lifetime_randomness = 0.1
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 90.0
+flatness = 1.0
+gravity = Vector3(0, 10, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 20.0
+damping_max = 30.0
+scale_min = 2.5
+scale_max = 3.5
+scale_curve = SubResource("CurveTexture_3qu28")
+turbulence_noise_strength = 8.65
+turbulence_noise_speed_random = 4.76
+turbulence_influence_min = 0.44
+turbulence_influence_max = 0.52
+attractor_interaction_enabled = false
+
+[sub_resource type="Curve" id="Curve_fpotk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_78qfe"]
+curve = SubResource("Curve_fpotk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_m515l"]
+lifetime_randomness = 0.25
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 30.0
+gravity = Vector3(0, -40, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_78qfe")
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_pu3ua"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_y13tn"]
+curve = SubResource("Curve_pu3ua")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r5ben"]
+lifetime_randomness = 0.1
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 75.0
+flatness = 1.0
+gravity = Vector3(0, -25, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.75
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_y13tn")
+turbulence_noise_strength = 8.65
+turbulence_noise_speed_random = 4.76
+turbulence_influence_min = 0.44
+turbulence_influence_max = 0.52
+attractor_interaction_enabled = false
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_bhxo7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ba2lc"]
+curve = SubResource("Curve_bhxo7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q3lpa"]
+lifetime_randomness = 0.1
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 75.0
+flatness = 1.0
+gravity = Vector3(0, -20, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.75
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_ba2lc")
+turbulence_noise_strength = 8.65
+turbulence_noise_speed_random = 4.76
+turbulence_influence_min = 0.44
+turbulence_influence_max = 0.52
+attractor_interaction_enabled = false
+collision_mode = 2
+collision_use_scale = true
+
+[sub_resource type="Curve" id="Curve_2v4k1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_k8miw"]
+curve = SubResource("Curve_2v4k1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nmnuf"]
+lifetime_randomness = 0.2
+emission_shape = 4
+emission_point_count = 1
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+spread = 75.0
+flatness = 1.0
+gravity = Vector3(0, -30, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.5
+scale_max = 1.25
+scale_curve = SubResource("CurveTexture_k8miw")
+attractor_interaction_enabled = false
+collision_mode = 2
+collision_use_scale = true
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 14
+platform_floor_layers = 0
+script = ExtResource("1_4uk46")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_ttmdb")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+current = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jrjnm")
+texture = ExtResource("1_ftd55")
+hframes = 15
+vframes = 17
+frame = 18
+region_rect = Rect2(0, 0, 315, 357)
+script = ExtResource("3_51rdd")
+
+[node name="ExclamationMark" type="Sprite2D" parent="Sprite2D"]
+visible = false
+z_index = 1
+position = Vector2(0, -14)
+texture = ExtResource("2_r05yh")
+hframes = 21
+vframes = 6
+frame = 19
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_7qsvk")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+process_priority = -1
+tree_root = SubResource("AnimationNodeStateMachine_hfrxs")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+script = ExtResource("4_l58kd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2.5)
+shape = SubResource("RectangleShape2D_4wf61")
+
+[node name="AudioStreamPlayer2Ds" type="Node2D" parent="."]
+script = ExtResource("8_ke7ed")
+
+[node name="Move" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2Ds"]
+script = ExtResource("10_iuv08")
+streams = null
+
+[node name="Land" type="AudioStreamPlayer2D" parent="AudioStreamPlayer2Ds"]
+script = ExtResource("10_iuv08")
+streams = null
+
+[node name="GPUParticles2Ds" type="Node2D" parent="."]
+script = ExtResource("15_empkt")
+
+[node name="Ground" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+position = Vector2(-1, 8.5)
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_bxk24")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-1, -1, 2, 2)
+script = ExtResource("15_482uw")
+
+[node name="WallSlide" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+position = Vector2(4.5, 7.5)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_nbt8v")
+lifetime = 0.55
+one_shot = true
+explosiveness = 0.9
+randomness = 0.75
+visibility_rect = Rect2(-1, -1, 2, 2)
+script = ExtResource("15_482uw")
+
+[node name="WallJump" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+position = Vector2(4.5, 7.5)
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_xfv1a")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-1, -1, 2, 2)
+script = ExtResource("15_482uw")
+
+[node name="Water" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+texture_filter = 1
+position = Vector2(-1, 8.5)
+emitting = false
+amount = 2
+process_material = SubResource("ParticleProcessMaterial_m515l")
+texture = ExtResource("23_tw0jk")
+lifetime = 1.75
+one_shot = true
+explosiveness = 0.9
+visibility_rect = Rect2(-4, -4, 8, 8)
+script = ExtResource("15_482uw")
+
+[node name="WaterGround" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+texture_filter = 1
+position = Vector2(-1, 8.5)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_r5ben")
+texture = ExtResource("23_tw0jk")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-4, -4, 8, 8)
+script = ExtResource("15_482uw")
+
+[node name="WaterWallJump" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+texture_filter = 1
+position = Vector2(4.5, 7.5)
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_q3lpa")
+texture = ExtResource("23_tw0jk")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-4, -4, 8, 8)
+script = ExtResource("15_482uw")
+
+[node name="WaterWallSlide" type="GPUParticles2D" parent="GPUParticles2Ds"]
+process_mode = 4
+texture_filter = 1
+position = Vector2(4.5, 7.5)
+emitting = false
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_nmnuf")
+texture = ExtResource("23_tw0jk")
+lifetime = 0.8
+one_shot = true
+randomness = 0.75
+visibility_rect = Rect2(-4, -4, 8, 8)
+script = ExtResource("15_482uw")
+
+[node name="Timers" type="Node" parent="."]
+script = ExtResource("10_wp438")
+
+[node name="JumpJustBuffer" type="Timer" parent="Timers"]
+wait_time = 0.075
+one_shot = true
+
+[node name="VJump" type="Timer" parent="Timers"]
+wait_time = 0.14
+one_shot = true
+
+[node name="HJump" type="Timer" parent="Timers"]
+wait_time = 0.075
+one_shot = true
+
+[node name="WallJumpUpDelay" type="Timer" parent="Timers"]
+wait_time = 0.2
+one_shot = true
+
+[node name="FloorBuffer" type="Timer" parent="Timers"]
+wait_time = 0.075
+one_shot = true
+
+[node name="WallBuffer" type="Timer" parent="Timers"]
+wait_time = 0.1
+one_shot = true
+
+[node name="WallSlideMoveBuffer" type="Timer" parent="Timers"]
+wait_time = 0.4
+one_shot = true
+
+[node name="GroundParticlesDelay" type="Timer" parent="Timers"]
+wait_time = 0.15
+one_shot = true
+
+[node name="WallSlideParticlesDelay" type="Timer" parent="Timers"]
+autostart = true
+
+[node name="Sit" type="Timer" parent="Timers"]
+one_shot = true
+
+[node name="WaterMoveParticlesDelay" type="Timer" parent="Timers"]
+wait_time = 0.175
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_1f2i6")
+state_initial = NodePath("StateStandIdle")
+
+[node name="StateStandIdle" type="Node" parent="StateMachine"]
+script = ExtResource("5_mrikd")
+
+[node name="StateStandMove" type="Node" parent="StateMachine"]
+script = ExtResource("6_8jtv1")
+
+[node name="StateCrouchIdle" type="Node" parent="StateMachine"]
+script = ExtResource("7_580jx")
+
+[node name="StateCrouchMove" type="Node" parent="StateMachine"]
+script = ExtResource("8_7m1tl")
+
+[node name="StateJump" type="Node" parent="StateMachine"]
+script = ExtResource("10_ap42o")
+
+[node name="StateFall" type="Node" parent="StateMachine"]
+script = ExtResource("11_yjst5")
+
+[node name="StateWallSlideUp" type="Node" parent="StateMachine"]
+script = ExtResource("15_xyus8")
+
+[node name="StateWallSlideDown" type="Node" parent="StateMachine"]
+script = ExtResource("16_lya3e")
+
+[node name="StateWallJumpSide" type="Node" parent="StateMachine"]
+script = ExtResource("17_ugl4n")
+
+[node name="StateWallJumpUp" type="Node" parent="StateMachine"]
+script = ExtResource("18_t4dvw")
+
+[node name="StateInteract" type="Node" parent="StateMachine"]
+script = ExtResource("19_ugnho")
+
+[node name="StateSit" type="Node" parent="StateMachine"]
+script = ExtResource("18_qdmqf")
+
+[node name="StatePhone" type="Node" parent="StateMachine"]
+script = ExtResource("25_pa5fl")
+text = "\"Blop where the hell are you?\"
+\"Did you oversleep today also?\"
+\"You need to get that in check…\"
+\"School is starting soon.\"
+\"If you don’t hurry up you’ll be late{,} again.\"
+\"And I’ll have to cover your ass{,} again.\"
+\"And I’m kinda getting tired of that.\"
+\"Oh by the way did you see they finally replaced the old vending machine?\"
+\"It has some good stuff in it.\"
+\"If you have some extra cash you could buy something cool.\"
+\"Anyway{,} see you later dude.\""
+
+[connection signal="surface_changed" from="." to="AudioStreamPlayer2Ds/Move" method="stream_set"]
+[connection signal="water_entered" from="." to="StateMachine/StateStandIdle" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateStandMove" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateCrouchIdle" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateCrouchMove" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateJump" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateWallSlideUp" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateWallSlideDown" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateWallJumpSide" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateWallJumpUp" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateInteract" method="_on_player_water_entered"]
+[connection signal="water_entered" from="." to="StateMachine/StateSit" method="_on_player_water_entered"]
+[connection signal="water_exited" from="." to="StateMachine/StateStandIdle" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateStandMove" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateCrouchIdle" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateCrouchMove" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateJump" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateWallSlideUp" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateWallSlideDown" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateWallJumpSide" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateWallJumpUp" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateInteract" method="_on_player_water_exited"]
+[connection signal="water_exited" from="." to="StateMachine/StateSit" method="_on_player_water_exited"]
+[connection signal="timeout" from="Timers/JumpJustBuffer" to="." method="_on_jump_just_buffer_timeout"]
+[connection signal="timeout" from="Timers/VJump" to="StateMachine/StateJump" method="_on_v_jump_timeout"]
+[connection signal="timeout" from="Timers/VJump" to="StateMachine/StateWallSlideUp" method="_on_v_jump_timeout"]
+[connection signal="timeout" from="Timers/VJump" to="StateMachine/StateWallJumpSide" method="_on_v_jump_timeout"]
+[connection signal="timeout" from="Timers/VJump" to="StateMachine/StateWallJumpUp" method="_on_v_jump_timeout"]
+[connection signal="timeout" from="Timers/HJump" to="StateMachine/StateWallJumpSide" method="_on_h_jump_timeout"]
+[connection signal="timeout" from="Timers/WallJumpUpDelay" to="StateMachine/StateWallJumpSide" method="_on_wall_jump_up_delay_timeout"]
+[connection signal="timeout" from="Timers/FloorBuffer" to="StateMachine/StateFall" method="_on_floor_buffer_timeout"]
+[connection signal="timeout" from="Timers/WallBuffer" to="StateMachine/StateFall" method="_on_wall_buffer_timeout"]
+[connection signal="timeout" from="Timers/WallSlideMoveBuffer" to="StateMachine/StateWallSlideUp" method="_on_wall_slide_move_buffer_timeout"]
+[connection signal="timeout" from="Timers/WallSlideMoveBuffer" to="StateMachine/StateWallSlideDown" method="_on_wall_slide_move_buffer_timeout"]
+[connection signal="timeout" from="Timers/WallSlideParticlesDelay" to="StateMachine/StateWallSlideUp" method="_on_wall_slide_particles_delay_timeout"]
+[connection signal="timeout" from="Timers/WallSlideParticlesDelay" to="StateMachine/StateWallSlideDown" method="_on_wall_slide_particles_delay_timeout"]
+[connection signal="timeout" from="Timers/Sit" to="StateMachine/StateStandIdle" method="_on_sit_timeout"]
+[connection signal="timeout" from="Timers/WaterMoveParticlesDelay" to="StateMachine/StateStandMove" method="_on_water_move_particles_delay_timeout"]
+[connection signal="timeout" from="Timers/WaterMoveParticlesDelay" to="StateMachine/StateCrouchMove" method="_on_water_move_particles_delay_timeout"]
+[connection signal="transitioned" from="StateMachine" to="." method="_on_state_machine_transitioned" flags=3]
+[connection signal="transitioned" from="StateMachine" to="Sprite2D" method="_on_state_machine_transitioned"]
+[connection signal="transitioned" from="StateMachine" to="Sprite2D/AnimationTree" method="_on_state_machine_transitioned"]

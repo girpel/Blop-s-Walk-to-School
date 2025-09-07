@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://dvme3bv7v75i7"]
+
+[ext_resource type="AudioStream" uid="uid://b3pex88yqmdwi" path="res://streams/ropes/bucket/line_2d/collision/0.wav" id="1_dlora"]
+[ext_resource type="AudioStream" uid="uid://t1xoe0ogiuyl" path="res://streams/ropes/bucket/line_2d/collision/1.wav" id="2_4r8uk"]
+[ext_resource type="AudioStream" uid="uid://24ncivfr7f5c" path="res://streams/ropes/bucket/line_2d/collision/2.wav" id="3_lcm7o"]
+[ext_resource type="AudioStream" uid="uid://csx4d8wgugfu6" path="res://streams/ropes/bucket/line_2d/collision/3.wav" id="4_fb368"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_dlora")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_4r8uk")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_lcm7o")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_fb368")
+stream_3/weight = 1.0

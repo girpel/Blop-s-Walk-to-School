@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=3 uid="uid://blcg42xoyh1jh"]
+
+[sub_resource type="GDScript" id="GDScript_t487m"]
+resource_name = "player_debug"
+script/source = "extends Sprite2D
+
+signal interact_end
+
+const KEY_DEBUG := KEY_F1
+const KEY_SLOW := KEY_CTRL
+
+const SPEED: int = Globals.TilesSize.SOLIDS_REGULAR
+
+var slow := false
+
+@onready var level := get_parent()
+@onready var level_cutscene := level.get_node(\"Cutscene\")
+@onready var player_animation_tree := Globals.player.get_node(\"Sprite2D/AnimationTree\")
+
+@onready var debug_is := OS.is_debug_build()
+
+func debug_change() -> void:
+	
+	Globals.player.visible = visible
+	visible = not visible
+	
+	if not visible:
+		Globals.player.input_disable = false
+		return
+	
+	position = Globals.player.position
+	
+	if level_cutscene.is_playing():
+		
+		level_cutscene.stop()
+		
+		player_animation_tree.active = true
+		Globals.player.input_disable = false
+	
+	elif Globals.player.input_disable:
+		emit_signal(\"interact_end\")
+	
+	Globals.player.input_disable = true
+	
+	return
+
+func position_update() -> void:
+	
+	if not visible:
+		return
+	
+	position += Vector2(Inputs.h_move, int(Inputs.crouch) - int(Inputs.up)) * SPEED / (SPEED if slow else 1)
+	
+	var collision_rect_size_half = Globals.player.collision_rect.size / 2
+	
+	for component in 2:
+		position[component] = clamp(position[component], level.AREA_RECT.position[component] + collision_rect_size_half[component], level.AREA_RECT.end[component] - collision_rect_size_half[component])
+	
+	Globals.player.velocity = Vector2.ZERO
+	Globals.player.position = position
+	
+	return
+
+func _ready() -> void:
+	
+	var player_sprite := Globals.player.get_node(\"Sprite2D\")
+	
+	texture = player_sprite.texture
+	hframes = player_sprite.hframes
+	vframes = player_sprite.vframes
+	
+	return
+
+func _input(event: InputEvent) -> void:
+	
+	if not debug_is:
+		return
+	
+	if event is InputEventKey:
+		
+		if event.pressed:
+			
+			match event.keycode:
+				
+				KEY_DEBUG:
+					debug_change()
+				
+				KEY_SLOW:
+					slow = true
+		
+		else:
+			
+			match event.keycode:
+				
+				KEY_SLOW:
+					slow = false
+	
+	return
+
+func _physics_process(_delta: float) -> void:
+	
+	position_update()
+	
+	return
+"
+
+[node name="PlayerDebug" type="Sprite2D"]
+texture_filter = 1
+script = SubResource("GDScript_t487m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+enabled = false

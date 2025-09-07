@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5jok6oanbixb"]
+
+[ext_resource type="PackedScene" uid="uid://dt87hu0h8eqn6" path="res://scenes/v_button/v_button_center_extend_input.tscn" id="1_m5ouh"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend_input/texture_rect_keyboard.gd" id="2_bcgy2"]
+
+[node name="VButtonCenterExtendInputKeyboard" instance=ExtResource("1_m5ouh")]
+
+[node name="Button" parent="." index="0"]
+custom_minimum_size = Vector2(108, 22)
+
+[node name="InputTexture" parent="Button/HBoxContainer/HBoxContainer" index="2"]
+custom_minimum_size = Vector2(90, 0)
+
+[node name="TextureRect" parent="Button/HBoxContainer/HBoxContainer/InputTexture" index="0"]
+script = ExtResource("2_bcgy2")
+keys_directory_path = "res://textures/v_button/v_button_extend_center_input/keyboard"
+
+[node name="InputText" parent="Button/HBoxContainer/HBoxContainer" index="3"]
+text = "PRESS KEY"

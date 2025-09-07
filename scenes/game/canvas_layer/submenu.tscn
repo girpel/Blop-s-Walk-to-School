@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv7moyf0j5fhm"]
+
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/submenu.gd" id="1_btkm2"]
+[ext_resource type="Script" path="res://scripts/v_button/v_container/v_buttons_container.gd" id="2_8fman"]
+
+[node name="Submenu" type="VBoxContainer"]
+offset_bottom = 46.0
+theme_override_constants/separation = 13
+alignment = 1
+script = ExtResource("1_btkm2")
+v_buttons_container_0_path = NodePath("VButtonsContainer")
+
+[node name="Title" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("2_8fman")

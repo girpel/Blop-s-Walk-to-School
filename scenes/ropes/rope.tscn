@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://b67kbkb3t73il"]
+
+[ext_resource type="Script" path="res://scripts/ropes/rope.gd" id="1_53ery"]
+[ext_resource type="Script" path="res://scripts/ropes/line_2d/collision.gd" id="2_1fk80"]
+[ext_resource type="PackedScene" uid="uid://en7rojdy5ip1" path="res://scenes/audio_stream_player_2d_delay/audio_stream_player_2d_delay.tscn" id="2_excv2"]
+[ext_resource type="Script" path="res://scripts/ropes/line_2d/ambience_buffer.gd" id="3_bpflp"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_p2jg4"]
+resource_local_to_scene = true
+b = Vector2(0, 8)
+
+[node name="Rope" type="Node2D"]
+script = ExtResource("1_53ery")
+points_size = 1
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_filter = 1
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 0, 8)
+width = 1.0
+texture_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Line2D"]
+collision_layer = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/Area2D"]
+shape = SubResource("SegmentShape2D_p2jg4")
+metadata/_edit_lock_ = true
+
+[node name="Collision" parent="Line2D" instance=ExtResource("2_excv2")]
+script = ExtResource("2_1fk80")
+
+[node name="PlayBuffer" parent="Line2D/Collision" index="0"]
+wait_time = 0.065
+
+[node name="AmbienceBuffer" type="Timer" parent="Line2D/Collision"]
+autostart = true
+script = ExtResource("3_bpflp")
+
+[connection signal="timeout" from="Line2D/Collision/AmbienceBuffer" to="." method="_on_ambience_buffer_timeout"]
+[connection signal="timeout" from="Line2D/Collision/AmbienceBuffer" to="Line2D/Collision/AmbienceBuffer" method="_on_timeout"]
+
+[editable path="Line2D/Collision"]

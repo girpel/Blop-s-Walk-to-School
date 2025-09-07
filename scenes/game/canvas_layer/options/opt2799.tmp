@@ -1,0 +1,315 @@
+[gd_scene load_steps=9 format=3 uid="uid://ca7v8y42lkw0"]
+
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="1_byabl"]
+[ext_resource type="Texture2D" uid="uid://dl01v1ygsdvb5" path="res://textures/options/title_options.png" id="2_o4e3u"]
+[ext_resource type="Script" path="res://scripts/v_button/v_buttons_container.gd" id="3_2op36"]
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="4_ja2gs"]
+[ext_resource type="Texture2D" uid="uid://cyd4mulh7y0w3" path="res://textures/options/title_video.png" id="5_4f8vy"]
+[ext_resource type="Texture2D" uid="uid://1b22cssfy5fm" path="res://textures/options/title_controls.png" id="5_ncsx5"]
+[ext_resource type="Texture2D" uid="uid://j4t3oisouyue" path="res://textures/options/title_audio.png" id="5_r5jrd"]
+[ext_resource type="PackedScene" uid="uid://ejda5v0goax0" path="res://scenes/v_button/v_button_center_select.tscn" id="5_ye068"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 544.0
+offset_bottom = 288.0
+theme = ExtResource("1_byabl")
+
+[node name="Main" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -70.0
+offset_right = 89.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="TitleOptions" type="TextureRect" parent="Main"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+texture = ExtResource("2_o4e3u")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Main"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("3_2op36")
+
+[node name="Controls" parent="Main/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "CONTROLS"
+
+[node name="Video" parent="Main/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "VIDEO"
+
+[node name="Audio" parent="Main/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "AUDIO"
+
+[node name="Back" parent="Main/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "BACK"
+
+[node name="Controls" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -106.0
+offset_right = 110.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="TitleVideo" type="TextureRect" parent="Controls"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+texture = ExtResource("5_ncsx5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Controls"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("3_2op36")
+
+[node name="MoveToggle" parent="Controls/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+size_flags_horizontal = 1
+selections = Array[String](["HOLD", "TOGGLE"])
+selection_custom_minimum_size_x = 64
+selection_wrap = true
+text = "MOVE"
+
+[node name="CrouchToggle" parent="Controls/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+size_flags_horizontal = 1
+selections = Array[String](["HOLD", "TOGGLE"])
+selection_custom_minimum_size_x = 64
+selection_wrap = true
+text = "CROUCH"
+
+[node name="JumpHeight" parent="Controls/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+size_flags_horizontal = 1
+selections = Array[String](["VARIED", "UNIFORM"])
+selection_custom_minimum_size_x = 74
+selection_wrap = true
+text = "JUMP HEIGHT"
+
+[node name="Keyboard" parent="Controls/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "KEYBOARD"
+
+[node name="Controller" parent="Controls/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "CONTROLLER"
+
+[node name="ResetDefaults" parent="Controls/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "RESET DEFAULTS"
+
+[node name="Back" parent="Controls/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "BACK"
+
+[node name="Video" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -94.0
+offset_right = 146.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="TitleVideo" type="TextureRect" parent="Video"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+texture = ExtResource("5_4f8vy")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Video"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("3_2op36")
+
+[node name="ColorPalette" parent="Video/VButtonsContainer" instance=ExtResource("5_ye068")]
+layout_mode = 2
+size_flags_horizontal = 1
+selections = Array[String](["CLASSIC"])
+selection_wrap = true
+text = "COLOR PALETTE"
+
+[node name="WindowMode" parent="Video/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+size_flags_horizontal = 1
+selections = Array[String](["FULLSCREEN", "WINDOWED", "BORDERLESS"])
+selection_custom_minimum_size_x = 105
+selection_wrap = true
+text = "WINDOW MODE"
+
+[node name="WindowScale" parent="Video/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+selections = Array[String](["1", "2", "3", "4", "5"])
+selection_custom_minimum_size_x = 15
+text = "WINDOW SCALE"
+
+[node name="WindowSafeArea" parent="Video/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+selections = Array[String](["0", "1", "2", "3", "4", "5"])
+selection_custom_minimum_size_x = 15
+text = "WINDOW SAFE AREA"
+
+[node name="VerticalSync" parent="Video/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+size_flags_horizontal = 1
+selections = Array[String](["ON", "OFF"])
+selection_custom_minimum_size_x = 33
+selection_wrap = true
+text = "VERTICAL SYNC"
+
+[node name="ResetDefaults" parent="Video/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "RESET DEFAULTS"
+
+[node name="Back" parent="Video/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "BACK"
+
+[node name="Audio" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -97.0
+offset_top = -82.0
+offset_right = 97.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="TitleAudio" type="TextureRect" parent="Audio"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_r5jrd")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Audio"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("3_2op36")
+
+[node name="Master" parent="Audio/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "MASTER"
+
+[node name="Ambience" parent="Audio/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "AMBIENCE"
+
+[node name="SoundEffects" parent="Audio/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "SOUND EFFECTS"
+
+[node name="UserInterface" parent="Audio/VButtonsContainer" instance=ExtResource("5_ye068")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "USER INTERFACE"
+
+[node name="ResetDefaults" parent="Audio/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "RESET DEFAULTS"
+
+[node name="Back" parent="Audio/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "BACK"

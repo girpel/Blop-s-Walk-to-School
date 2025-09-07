@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://be6isgrc4w64g"]
+
+[ext_resource type="PackedScene" uid="uid://nhbmk7k8jijc" path="res://scenes/rigid_body_2d/rigid_body_2d_collision.tscn" id="1_qywyr"]
+[ext_resource type="Script" path="res://scripts/rigid_body_2d/rigid_body_2d_collision_ball.gd" id="2_hfxqf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kcnx8"]
+resource_local_to_scene = true
+friction = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6u34a"]
+resource_local_to_scene = true
+radius = 8.0
+
+[node name="RigidBody2DCollisionBall" instance=ExtResource("1_qywyr")]
+physics_material_override = SubResource("PhysicsMaterial_kcnx8")
+script = ExtResource("2_hfxqf")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_6u34a")

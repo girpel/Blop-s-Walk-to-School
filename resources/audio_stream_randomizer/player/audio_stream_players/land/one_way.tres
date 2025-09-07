@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://dn0yd0q0iicy6"]
+
+[ext_resource type="AudioStream" uid="uid://dbq1g75hbwa76" path="res://streams/player/audio_stream_players/land/one_way.wav" id="1_2aqom"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_2aqom")
+stream_0/weight = 1.0

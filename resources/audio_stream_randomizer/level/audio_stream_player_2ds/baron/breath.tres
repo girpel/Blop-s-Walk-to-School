@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://bixhapafve5g3"]
+
+[ext_resource type="AudioStream" uid="uid://bxlk8pxq53hn2" path="res://streams/level/audio_stream_player_2ds/baron/breath/0.wav" id="1_m4r2p"]
+[ext_resource type="AudioStream" uid="uid://bkpuxni6gmbl7" path="res://streams/level/audio_stream_player_2ds/baron/breath/1.wav" id="2_jhipg"]
+[ext_resource type="AudioStream" uid="uid://d3tdfpoejnntx" path="res://streams/level/audio_stream_player_2ds/baron/breath/2.wav" id="3_r3885"]
+[ext_resource type="AudioStream" uid="uid://clypgmb5b12ra" path="res://streams/level/audio_stream_player_2ds/baron/breath/3.wav" id="4_qqkp8"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_m4r2p")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_jhipg")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_r3885")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_qqkp8")
+stream_3/weight = 1.0

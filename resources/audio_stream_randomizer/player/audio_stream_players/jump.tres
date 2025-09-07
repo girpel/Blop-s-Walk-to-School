@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://dhq4qn5l7e61l"]
+
+[ext_resource type="AudioStream" uid="uid://bxwhywowh2sa2" path="res://streams/player/audio_stream_players/jump.wav" id="1_284nc"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_284nc")
+stream_0/weight = 1.0

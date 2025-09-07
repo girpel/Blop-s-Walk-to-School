@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://oxiii3w60qbg"]
+
+[ext_resource type="Script" path="res://addons/chunk_texture_importer/scripts/chunks/chunks.gd" id="1_g1xy6"]
+
+[node name="Chunks" type="Node2D"]
+position = Vector2(256, 144)
+script = ExtResource("1_g1xy6")
+
+[node name="0" type="Sprite2D" parent="."]
+position = Vector2(nan, nan)
+
+[node name="1" type="Sprite2D" parent="."]
+position = Vector2(nan, nan)
+
+[node name="2" type="Sprite2D" parent="."]
+position = Vector2(nan, nan)
+
+[node name="3" type="Sprite2D" parent="."]
+position = Vector2(nan, nan)

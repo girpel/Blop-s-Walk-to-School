@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://ctdknjlhnua31"]
+
+[ext_resource type="AudioStream" uid="uid://b8jgaqmf47wp8" path="res://streams/level/audio_stream_player_2ds/baba_house/0.wav" id="1_tfcl4"]
+[ext_resource type="AudioStream" uid="uid://dusixxuoqnyny" path="res://streams/level/audio_stream_player_2ds/baba_house/1.wav" id="2_w8fdy"]
+[ext_resource type="AudioStream" uid="uid://c04e0ky0mgbhf" path="res://streams/level/audio_stream_player_2ds/baba_house/2.wav" id="3_7gtin"]
+[ext_resource type="AudioStream" uid="uid://bn1w6s14f66x8" path="res://streams/level/audio_stream_player_2ds/baba_house/3.wav" id="4_bt15v"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_tfcl4")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("2_w8fdy")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("3_7gtin")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("4_bt15v")
+stream_3/weight = 1.0

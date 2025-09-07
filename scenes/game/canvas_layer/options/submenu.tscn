@@ -1,0 +1,27 @@
+[gd_scene load_steps=8 format=3 uid="uid://coatptvl52lbi"]
+
+[ext_resource type="PackedScene" uid="uid://cv7moyf0j5fhm" path="res://scenes/game/canvas_layer/submenu.tscn" id="1_m1j6d"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/options/submenu.gd" id="2_sxf7c"]
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="2_vorq2"]
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="3_032lb"]
+[ext_resource type="AudioStream" uid="uid://cl7x65rejrxki" path="res://streams/game/canvas_layer/stream_pressed_ui_back.wav" id="5_dp0o8"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_jjhhp"]
+action = &"ui_back"
+
+[sub_resource type="Shortcut" id="Shortcut_sgght"]
+events = [SubResource("InputEventAction_jjhhp")]
+
+[node name="Submenu" instance=ExtResource("1_m1j6d")]
+script = ExtResource("2_sxf7c")
+menu_back_path = NodePath("")
+
+[node name="Back" parent="VButtonsContainer" index="0" instance=ExtResource("2_vorq2")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("3_032lb")
+text = "BACK"
+shortcut = SubResource("Shortcut_sgght")
+stream_pressed = ExtResource("5_dp0o8")
+
+[connection signal="pressed" from="VButtonsContainer/Back" to="." method="_on_back_pressed"]

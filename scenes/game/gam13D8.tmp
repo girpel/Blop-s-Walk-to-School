@@ -1,0 +1,732 @@
+[gd_scene load_steps=41 format=3 uid="uid://dlsc0kqj7l1ep"]
+
+[ext_resource type="Script" path="res://scripts/game/game.gd" id="1_8jyms"]
+[ext_resource type="Script" path="res://scripts/game/sub_viewport.gd" id="1_o5rr1"]
+[ext_resource type="PackedScene" uid="uid://d162pp6gcrwbx" path="res://scenes/level/level.tscn" id="1_vbisg"]
+[ext_resource type="Script" path="res://scripts/game/screen.gd" id="2_gh5bu"]
+[ext_resource type="Shader" path="res://shaders/game/canvas_layer/color_remap.gdshader" id="4_tf0wt"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/title_screen/title_screen.gd" id="5_o846k"]
+[ext_resource type="Texture2D" uid="uid://clh73cuuctwf3" path="res://textures/game/canvas_layer/title_screen/title.png" id="6_wdqyc"]
+[ext_resource type="Script" path="res://scripts/v_button/v_container/v_buttons_container.gd" id="7_5onvx"]
+[ext_resource type="PackedScene" uid="uid://bvfsgdx46wmjd" path="res://scenes/v_button/v_button_begin.tscn" id="8_5lkjj"]
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="9_1yiua"]
+[ext_resource type="PackedScene" uid="uid://187djkvuhdf6" path="res://scenes/input_prompt/input_prompt_ui.tscn" id="9_jjoxt"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/pause_menu/pause_menu.gd" id="9_o4rst"]
+[ext_resource type="Script" path="res://scripts/input_prompt/input_prompt_tweener.gd" id="10_1wimd"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/options/options.gd" id="10_2wj5o"]
+[ext_resource type="PackedScene" uid="uid://cv7moyf0j5fhm" path="res://scenes/game/canvas_layer/submenu.tscn" id="10_e056s"]
+[ext_resource type="AudioStream" uid="uid://b6pda7c5bfpvp" path="res://streams/game/canvas_layer/pause_menu/stream_pause.wav" id="11_re0yn"]
+[ext_resource type="Texture2D" uid="uid://dl01v1ygsdvb5" path="res://textures/game/canvas_layer/options/title_options.png" id="12_6frln"]
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="13_hytw8"]
+[ext_resource type="AudioStream" uid="uid://cl7x65rejrxki" path="res://streams/game/canvas_layer/stream_pressed_ui_back.wav" id="14_1an8w"]
+[ext_resource type="Texture2D" uid="uid://1b22cssfy5fm" path="res://textures/game/canvas_layer/options/title_controls.png" id="15_5bglm"]
+[ext_resource type="PackedScene" uid="uid://fueam5jlhlbt" path="res://scenes/v_button/v_button_center_extend_select.tscn" id="16_cjnrf"]
+[ext_resource type="Texture2D" uid="uid://cyd4mulh7y0w3" path="res://textures/game/canvas_layer/options/title_video.png" id="17_w5yy8"]
+[ext_resource type="Texture2D" uid="uid://j4t3oisouyue" path="res://textures/game/canvas_layer/options/title_audio.png" id="18_co6kh"]
+[ext_resource type="PackedScene" uid="uid://q1a3yrrt7yeo" path="res://scenes/game/canvas_layer/options/submenu_input.tscn" id="19_tfhdm"]
+[ext_resource type="Texture2D" uid="uid://b2ky6ja5pckpk" path="res://textures/game/canvas_layer/options/title_keyboard.png" id="20_x3n5c"]
+[ext_resource type="PackedScene" uid="uid://b5jok6oanbixb" path="res://scenes/v_button/v_button_center_extend_input_keyboard.tscn" id="21_1ly1i"]
+[ext_resource type="Texture2D" uid="uid://7f3fw8ha3770" path="res://textures/game/canvas_layer/options/title_controller.png" id="22_cc2b3"]
+[ext_resource type="PackedScene" uid="uid://bq1fyx5a7865p" path="res://scenes/v_button/v_button_center_extend_input_controller.tscn" id="23_dgaun"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/color_remap.gd" id="24_qji44"]
+[ext_resource type="Texture2D" uid="uid://ch7iamtcqynrl" path="res://textures/game/canvas_layer/pause_menu/title.png" id="24_tlsxy"]
+[ext_resource type="PackedScene" uid="uid://coatptvl52lbi" path="res://scenes/game/canvas_layer/options/submenu.tscn" id="25_ikljs"]
+[ext_resource type="PackedScene" uid="uid://bawgusv8vy2hf" path="res://scenes/game/canvas_layer/options/submenu_select.tscn" id="26_7bhgm"]
+[ext_resource type="Script" path="res://scripts/input_prompt/input_prompt_uis_container.gd" id="33_f2ug3"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_xvjwi"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="Animation" id="Animation_b31wl"]
+resource_name = "default"
+length = 1.08334
+step = 0.0416667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Title:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.08333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(520, 40), Vector2(92, 40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VButtonsContainer:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.08333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-98, 168), Vector2(16, 168)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hgknj"]
+_data = {
+"default": SubResource("Animation_b31wl")
+}
+
+[sub_resource type="InputEventAction" id="InputEventAction_a5ecl"]
+action = &"ui_back"
+
+[sub_resource type="InputEventAction" id="InputEventAction_2w08t"]
+action = &"ui_pause"
+
+[sub_resource type="Shortcut" id="Shortcut_mkx45"]
+events = [SubResource("InputEventAction_a5ecl"), SubResource("InputEventAction_2w08t")]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwgh6"]
+shader = ExtResource("4_tf0wt")
+shader_parameter/color_0 = Color(0, 0, 0, 1)
+shader_parameter/color_1 = Color(1, 1, 1, 1)
+
+[node name="Game" type="Node"]
+script = ExtResource("1_8jyms")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+disable_3d = true
+handle_input_locally = false
+audio_listener_enable_2d = true
+render_target_update_mode = 4
+script = ExtResource("1_o5rr1")
+
+[node name="Level" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_vbisg")]
+
+[node name="Screen" type="Node2D" parent="."]
+script = ExtResource("2_gh5bu")
+
+[node name="Camera2D" type="Camera2D" parent="Screen"]
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="TextureRect" type="TextureRect" parent="Screen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_xvjwi")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TitleScreen" type="Control" parent="CanvasLayer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5_o846k")
+v_buttons_container_path = NodePath("VButtonsContainer")
+
+[node name="Transition" type="AnimationPlayer" parent="CanvasLayer/TitleScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_hgknj")
+}
+autoplay = "default"
+
+[node name="Title" type="TextureRect" parent="CanvasLayer/TitleScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.004
+anchor_bottom = 1.0
+offset_left = 520.0
+offset_top = 40.0
+offset_right = 404.952
+offset_bottom = -122.0
+texture = ExtResource("6_wdqyc")
+stretch_mode = 5
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="CanvasLayer/TitleScreen"]
+layout_mode = 0
+offset_left = -98.0
+offset_top = 168.0
+offset_right = -8.0
+offset_bottom = 274.0
+theme_override_constants/separation = 6
+script = ExtResource("7_5onvx")
+
+[node name="Start" parent="CanvasLayer/TitleScreen/VButtonsContainer" instance=ExtResource("8_5lkjj")]
+layout_mode = 2
+text = "START"
+
+[node name="Options" parent="CanvasLayer/TitleScreen/VButtonsContainer" instance=ExtResource("8_5lkjj")]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="Credits" parent="CanvasLayer/TitleScreen/VButtonsContainer" instance=ExtResource("8_5lkjj")]
+layout_mode = 2
+text = "CREDITS"
+
+[node name="QuitGame" parent="CanvasLayer/TitleScreen/VButtonsContainer" instance=ExtResource("8_5lkjj")]
+layout_mode = 2
+text = "QUIT GAME"
+
+[node name="InputPromptAccept" parent="CanvasLayer/TitleScreen" instance=ExtResource("9_jjoxt")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 516.0
+offset_top = 263.0
+offset_right = 552.0
+offset_bottom = 282.0
+grow_horizontal = 1
+grow_vertical = 1
+action = &"ui_accept"
+text = "ACCEPT"
+
+[node name="InputPromptTweener" type="Node" parent="CanvasLayer/TitleScreen/InputPromptAccept"]
+script = ExtResource("10_1wimd")
+position_x_tween_duration = 1.0
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer"]
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_o4rst")
+submenu_path = NodePath("Submenu")
+stream_pause = ExtResource("11_re0yn")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Submenu" parent="CanvasLayer/PauseMenu" instance=ExtResource("10_e056s")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -23.0
+offset_right = 78.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="CanvasLayer/PauseMenu/Submenu" index="0"]
+texture = ExtResource("24_tlsxy")
+
+[node name="Continue" parent="CanvasLayer/PauseMenu/Submenu/VButtonsContainer" index="0" instance=ExtResource("13_hytw8")]
+layout_mode = 2
+text = "CONTINUE"
+shortcut = SubResource("Shortcut_mkx45")
+stream_pressed = ExtResource("14_1an8w")
+
+[node name="Options" parent="CanvasLayer/PauseMenu/Submenu/VButtonsContainer" index="1" instance=ExtResource("13_hytw8")]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="TitleScreen" parent="CanvasLayer/PauseMenu/Submenu/VButtonsContainer" index="2" instance=ExtResource("13_hytw8")]
+layout_mode = 2
+text = "TITLE SCREEN"
+
+[node name="QuitGame" parent="CanvasLayer/PauseMenu/Submenu/VButtonsContainer" index="3" instance=ExtResource("13_hytw8")]
+layout_mode = 2
+text = "QUIT GAME"
+
+[node name="Options" type="Control" parent="CanvasLayer"]
+process_mode = 4
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_1yiua")
+script = ExtResource("10_2wj5o")
+menu_main_path = NodePath("Main")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Main" parent="CanvasLayer/Options" instance=ExtResource("25_ikljs")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.5
+offset_top = -70.0
+offset_right = 88.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+menu_back_path = NodePath("..")
+
+[node name="Title" parent="CanvasLayer/Options/Main" index="0"]
+texture = ExtResource("12_6frln")
+
+[node name="Controls" parent="CanvasLayer/Options/Main/VButtonsContainer" index="0" instance=ExtResource("13_hytw8")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("9_1yiua")
+text = "CONTROLS"
+
+[node name="Video" parent="CanvasLayer/Options/Main/VButtonsContainer" index="1" instance=ExtResource("13_hytw8")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("9_1yiua")
+text = "VIDEO"
+
+[node name="Audio" parent="CanvasLayer/Options/Main/VButtonsContainer" index="2" instance=ExtResource("13_hytw8")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("9_1yiua")
+text = "AUDIO"
+
+[node name="Controls" parent="CanvasLayer/Options" instance=ExtResource("26_7bhgm")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -130.0
+offset_right = 110.0
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 2
+menu_back_path = NodePath("../Main")
+
+[node name="Title" parent="CanvasLayer/Options/Controls" index="0"]
+texture = ExtResource("15_5bglm")
+
+[node name="MoveToggle" parent="CanvasLayer/Options/Controls/VButtonsContainer" index="0" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["HOLD", "TOGGLE"])
+selection_custom_minimum_size_x = 64
+selection_wrap = true
+text = "MOVE"
+
+[node name="CrouchToggle" parent="CanvasLayer/Options/Controls/VButtonsContainer" index="1" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["HOLD", "TOGGLE"])
+selection_custom_minimum_size_x = 64
+selection_wrap = true
+text = "CROUCH"
+
+[node name="JumpHold" parent="CanvasLayer/Options/Controls/VButtonsContainer" index="2" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["PRESS", "HOLD"])
+selection_custom_minimum_size_x = 52
+selection_wrap = true
+text = "JUMP"
+
+[node name="JumpHeight" parent="CanvasLayer/Options/Controls/VButtonsContainer" index="3" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["VARIED", "UNIFORM"])
+selection_custom_minimum_size_x = 74
+selection_wrap = true
+text = "JUMP HEIGHT"
+
+[node name="Keyboard" parent="CanvasLayer/Options/Controls/VButtonsContainer" index="4" instance=ExtResource("13_hytw8")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("9_1yiua")
+text = "KEYBOARD"
+
+[node name="Controller" parent="CanvasLayer/Options/Controls/VButtonsContainer" index="5" instance=ExtResource("13_hytw8")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("9_1yiua")
+text = "CONTROLLER"
+
+[node name="Video" parent="CanvasLayer/Options" instance=ExtResource("26_7bhgm")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -132.0
+offset_top = -94.0
+offset_right = 132.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+menu_back_path = NodePath("../Main")
+
+[node name="Title" parent="CanvasLayer/Options/Video" index="0"]
+texture = ExtResource("17_w5yy8")
+
+[node name="ColorPalette" parent="CanvasLayer/Options/Video/VButtonsContainer" index="0" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["CLASSIC", "SOFT", "GRAYSCALE", "LUSH", "RUST", "PURPLER", "VINTAGE", "MOON", "BUBBLES", "INFERNO", "KIMU", "HOLOVO", "GREENBOY", "TERMINAL", "HARDMODE", "INVERTED"])
+selection_custom_minimum_size_x = 94
+selection_wrap = true
+text = "COLOR PALETTE"
+
+[node name="WindowMode" parent="CanvasLayer/Options/Video/VButtonsContainer" index="1" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["FULLSCREEN", "WINDOWED", "BORDERLESS"])
+selection_index_start = 1
+selection_custom_minimum_size_x = 104
+selection_wrap = true
+text = "WINDOW MODE"
+
+[node name="WindowScale" parent="CanvasLayer/Options/Video/VButtonsContainer" index="2" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["1", "2", "3", "4", "5"])
+selection_index_start = 1
+selection_custom_minimum_size_x = 14
+text = "WINDOW SCALE"
+
+[node name="VerticalSync" parent="CanvasLayer/Options/Video/VButtonsContainer" index="3" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["OFF", "ON"])
+selection_index_start = 1
+selection_custom_minimum_size_x = 33
+selection_wrap = true
+text = "VERTICAL SYNC"
+
+[node name="Audio" parent="CanvasLayer/Options" instance=ExtResource("26_7bhgm")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -94.0
+offset_right = 99.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+menu_back_path = NodePath("../Main")
+
+[node name="Title" parent="CanvasLayer/Options/Audio" index="0"]
+texture = ExtResource("18_co6kh")
+
+[node name="Master" parent="CanvasLayer/Options/Audio/VButtonsContainer" index="0" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "MASTER"
+
+[node name="Ambience" parent="CanvasLayer/Options/Audio/VButtonsContainer" index="1" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "AMBIENCE
+"
+
+[node name="SoundEffects" parent="CanvasLayer/Options/Audio/VButtonsContainer" index="2" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "SOUND EFFECTS"
+
+[node name="UserInterface" parent="CanvasLayer/Options/Audio/VButtonsContainer" index="3" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "USER INTERFACE"
+
+[node name="Keyboard" parent="CanvasLayer/Options" instance=ExtResource("19_tfhdm")]
+visible = false
+layout_mode = 1
+
+[node name="Menu" parent="CanvasLayer/Options/Keyboard" index="0"]
+offset_left = -111.0
+offset_right = 111.0
+offset_bottom = 480.0
+menu_back_path = NodePath("../../Controls")
+
+[node name="Title" parent="CanvasLayer/Options/Keyboard/Menu" index="0"]
+texture = ExtResource("20_x3n5c")
+
+[node name="MoveLeft" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/Gameplay/VButtonsContainer" index="0" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"move_left"
+text = "LEFT"
+
+[node name="MoveRight" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/Gameplay/VButtonsContainer" index="1" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"move_right"
+text = "RIGHT"
+
+[node name="Crouch" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/Gameplay/VButtonsContainer" index="2" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"crouch"
+text = "CROUCH"
+
+[node name="Jump" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/Gameplay/VButtonsContainer" index="3" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"jump"
+text = "JUMP
+"
+
+[node name="Interact" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/Gameplay/VButtonsContainer" index="4" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"interact"
+text = "INTERACT"
+
+[node name="WallJumpUp" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/Gameplay/VButtonsContainer" index="5" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"wall_jump_up"
+text = "UP WALL JUMP"
+
+[node name="UILeft" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="0" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_left"
+text = "LEFT"
+
+[node name="UIRight" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="1" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_right"
+text = "RIGHT"
+
+[node name="UIUp" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="2" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_up"
+text = "UP"
+
+[node name="UIDown" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="3" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_down"
+text = "DOWN"
+
+[node name="UIAccept" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="4" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_accept"
+text = "ACCEPT"
+
+[node name="UIBack" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="5" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_back"
+text = "BACK"
+
+[node name="UIPause" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="6" instance=ExtResource("21_1ly1i")]
+custom_minimum_size = Vector2(108, 0)
+layout_mode = 2
+action = &"ui_pause"
+text = "PAUSE"
+
+[node name="Controller" parent="CanvasLayer/Options" instance=ExtResource("19_tfhdm")]
+visible = false
+layout_mode = 1
+
+[node name="Menu" parent="CanvasLayer/Options/Controller" index="0"]
+menu_back_path = NodePath("../../Controls")
+
+[node name="Title" parent="CanvasLayer/Options/Controller/Menu" index="0"]
+texture = ExtResource("22_cc2b3")
+
+[node name="MoveLeft" parent="CanvasLayer/Options/Controller/Menu/VButtons/Gameplay/VButtonsContainer" index="0" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"move_left"
+text = "LEFT"
+
+[node name="MoveRight" parent="CanvasLayer/Options/Controller/Menu/VButtons/Gameplay/VButtonsContainer" index="1" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"move_right"
+text = "RIGHT"
+
+[node name="Crouch" parent="CanvasLayer/Options/Controller/Menu/VButtons/Gameplay/VButtonsContainer" index="2" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"crouch"
+text = "CROUCH"
+
+[node name="Jump" parent="CanvasLayer/Options/Controller/Menu/VButtons/Gameplay/VButtonsContainer" index="3" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"jump"
+text = "JUMP"
+
+[node name="Interact" parent="CanvasLayer/Options/Controller/Menu/VButtons/Gameplay/VButtonsContainer" index="4" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"interact"
+text = "INTERACT"
+
+[node name="WallJumpUp" parent="CanvasLayer/Options/Controller/Menu/VButtons/Gameplay/VButtonsContainer" index="5" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"wall_jump_up"
+text = "UP WALL JUMP"
+
+[node name="UILeft" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="0" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"ui_left"
+text = "LEFT"
+
+[node name="UIRight" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="1" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"ui_right"
+text = "RIGHT"
+
+[node name="UIUp" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="2" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"ui_up"
+text = "UP"
+
+[node name="UIDown" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="3" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"ui_down"
+text = "DOWN"
+
+[node name="UIAccept" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="4" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"ui_accept"
+text = "ACCEPT"
+
+[node name="UIBack" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="5" instance=ExtResource("23_dgaun")]
+custom_minimum_size = Vector2(267, 0)
+layout_mode = 2
+action = &"ui_back"
+text = "BACK"
+
+[node name="Controller" parent="CanvasLayer/Options/Controller/Menu/VButtons/VButtonsContainer" index="0" instance=ExtResource("16_cjnrf")]
+custom_minimum_size = Vector2(42, 0)
+layout_mode = 2
+selections = Array[String](["GENERAL", "XBOX", "DUELSHOCK", "DUELSENSE", "SWITCH", "STEAM", "LUNA"])
+selection_index_start = 1
+selection_custom_minimum_size_x = 94
+selection_wrap = true
+text = "CONTROLLER"
+
+[node name="InputPromptUIsContainer" type="HBoxContainer" parent="CanvasLayer/Options"]
+layout_mode = 0
+offset_left = 516.0
+offset_top = 263.0
+offset_right = 581.0
+offset_bottom = 282.0
+script = ExtResource("33_f2ug3")
+
+[node name="Accept" parent="CanvasLayer/Options/InputPromptUIsContainer" instance=ExtResource("9_jjoxt")]
+layout_mode = 2
+action = &"ui_accept"
+text = "ACCEPT"
+
+[node name="Cancel" parent="CanvasLayer/Options/InputPromptUIsContainer" instance=ExtResource("9_jjoxt")]
+layout_mode = 2
+action = &"ui_back"
+text = "BACK"
+
+[node name="InputPromptTweener" type="Node" parent="CanvasLayer/Options/InputPromptUIsContainer"]
+script = ExtResource("10_1wimd")
+position_x_tween_duration = 0.18
+
+[node name="ColorRemap" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_uwgh6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("24_qji44")
+
+[connection signal="cutscene_play" from="CanvasLayer/TitleScreen" to="SubViewportContainer/SubViewport/Level/Cutscene" method="play" binds= ["default"]]
+[connection signal="cutscene_reset" from="CanvasLayer/TitleScreen" to="SubViewportContainer/SubViewport/Level/Cutscene" method="play" flags=3 binds= ["reset"]]
+[connection signal="options" from="CanvasLayer/TitleScreen" to="CanvasLayer/Options" method="_on_options"]
+[connection signal="ready" from="CanvasLayer/TitleScreen" to="SubViewportContainer/SubViewport/Level/CanvasLayer/UI/CoinCounter" method="hide"]
+[connection signal="ready" from="CanvasLayer/TitleScreen" to="SubViewportContainer/SubViewport/Level/CanvasLayer/UI/TextPanel" method="_on_title_screen_ready"]
+[connection signal="start_finished" from="CanvasLayer/TitleScreen" to="CanvasLayer/PauseMenu" method="set_process_mode" binds= [3]]
+[connection signal="start_started" from="CanvasLayer/TitleScreen" to="SubViewportContainer/SubViewport/Level/CanvasLayer/UI/CoinCounter/Transition" method="play" binds= ["default"]]
+[connection signal="animation_finished" from="CanvasLayer/TitleScreen/Transition" to="CanvasLayer/TitleScreen" method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="CanvasLayer/TitleScreen/VButtonsContainer/Start" to="CanvasLayer/TitleScreen" method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/TitleScreen/VButtonsContainer/Start" to="CanvasLayer/TitleScreen/Transition" method="play_backwards" binds= ["default"]]
+[connection signal="pressed" from="CanvasLayer/TitleScreen/VButtonsContainer/Options" to="CanvasLayer/TitleScreen" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/TitleScreen/VButtonsContainer/QuitGame" to="CanvasLayer/TitleScreen" method="_on_quit_game_pressed"]
+[connection signal="options" from="CanvasLayer/PauseMenu" to="CanvasLayer/Options" method="_on_options"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Submenu/VButtonsContainer/Continue" to="CanvasLayer/PauseMenu" method="_on_continue_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Submenu/VButtonsContainer/Options" to="CanvasLayer/PauseMenu" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Submenu/VButtonsContainer/TitleScreen" to="CanvasLayer/PauseMenu" method="_on_title_screen_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/Submenu/VButtonsContainer/QuitGame" to="CanvasLayer/PauseMenu" method="_on_quit_game_pressed"]
+[connection signal="draw" from="CanvasLayer/Options" to="CanvasLayer/Options/InputPromptUIsContainer/InputPromptTweener" method="enter"]
+[connection signal="pressed" from="CanvasLayer/Options/Main/VButtonsContainer/Controls" to="CanvasLayer/Options/Controls" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/Main/VButtonsContainer/Video" to="CanvasLayer/Options/Video" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/Main/VButtonsContainer/Audio" to="CanvasLayer/Options/Audio" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/Controls/VButtonsContainer/Keyboard" to="CanvasLayer/Options/Keyboard/Menu" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/Controls/VButtonsContainer/Controller" to="CanvasLayer/Options/Controller/Menu" method="_on_button_pressed"]
+
+[editable path="CanvasLayer/PauseMenu/Submenu"]
+[editable path="CanvasLayer/Options/Main"]
+[editable path="CanvasLayer/Options/Controls"]
+[editable path="CanvasLayer/Options/Video"]
+[editable path="CanvasLayer/Options/Audio"]
+[editable path="CanvasLayer/Options/Keyboard"]
+[editable path="CanvasLayer/Options/Controller"]

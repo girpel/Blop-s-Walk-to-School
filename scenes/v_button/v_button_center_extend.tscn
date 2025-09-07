@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://c2xmesjxijvey"]
+
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="1_kfe1r"]
+[ext_resource type="Script" path="res://scripts/v_button/v_button_center_extend.gd" id="2_arv0b"]
+
+[node name="VButtonCenterExtend" instance=ExtResource("1_kfe1r")]
+offset_right = 8.0
+offset_bottom = 22.0
+size_flags_horizontal = 3
+script = ExtResource("2_arv0b")
+
+[node name="Button" parent="." index="0"]
+custom_minimum_size = Vector2(12, 22)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Button" index="0"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 6.0
+grow_horizontal = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Button/HBoxContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="Text" type="Button" parent="Button/HBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+focus_mode = 0
+mouse_filter = 2
+disabled = true
+button_mask = 0
+
+[node name="Space" type="Control" parent="Button/HBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="Space" type="Control" parent="Button/HBoxContainer" index="1"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+mouse_filter = 1

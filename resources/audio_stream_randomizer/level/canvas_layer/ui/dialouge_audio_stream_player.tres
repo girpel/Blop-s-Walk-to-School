@@ -1,0 +1,9 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://du216c7tjdad6"]
+
+[ext_resource type="AudioStream" uid="uid://cdy1mervbsxud" path="res://streams/level/canvas_layer/ui/dialouge_audio_stream_player.wav" id="1_wp52n"]
+
+[resource]
+random_pitch = 1.03
+streams_count = 1
+stream_0/stream = ExtResource("1_wp52n")
+stream_0/weight = 1.0

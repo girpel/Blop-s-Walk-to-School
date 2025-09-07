@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://7jjoq52qhd48"]
+
+[ext_resource type="PackedScene" uid="uid://b67kbkb3t73il" path="res://scenes/ropes/rope.tscn" id="1_sybg8"]
+[ext_resource type="Script" path="res://scripts/ropes/rope_sprite.gd" id="2_ffr21"]
+[ext_resource type="PackedScene" uid="uid://en7rojdy5ip1" path="res://scenes/audio_stream_player_2d_delay/audio_stream_player_2d_delay.tscn" id="3_ltfu6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1khkh"]
+resource_local_to_scene = true
+b = Vector2(0, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o7aws"]
+resource_local_to_scene = true
+size = Vector2(0, 0)
+
+[node name="RopeSprite" instance=ExtResource("1_sybg8")]
+script = ExtResource("2_ffr21")
+
+[node name="CollisionShape2D" parent="Line2D/Area2D" index="0"]
+shape = SubResource("SegmentShape2D_1khkh")
+
+[node name="Collision" parent="Line2D" index="1"]
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+texture_filter = 1
+position = Vector2(0, 8)
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" index="0"]
+collision_layer = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D" index="0"]
+shape = SubResource("RectangleShape2D_o7aws")
+metadata/_edit_lock_ = true
+
+[node name="Collision" parent="Sprite2D" index="1" instance=ExtResource("3_ltfu6")]
+
+[node name="PlayBuffer" parent="Sprite2D/Collision" index="0"]
+wait_time = 0.05
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="." index="2"]
+position = Vector2(-1.84774e-07, 0)
+scale = Vector2(0.1, 0.1)
+rect = Rect2(-1, -1, 2, 2)
+
+[editable path="Line2D/Collision"]
+[editable path="Sprite2D/Collision"]

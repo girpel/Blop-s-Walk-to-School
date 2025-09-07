@@ -1,0 +1,16 @@
+[remap]
+
+importer="chunk.texture.importer"
+type="Resource"
+uid="uid://dvdsypq8cfbq3"
+path="res://.godot/imported/world.chunk-ba6a26e9302784758b6db3fbf0c5ae07.tres"
+
+[deps]
+
+source_file="res://textures/level/background/world.chunk"
+dest_files=["res://.godot/imported/world.chunk-ba6a26e9302784758b6db3fbf0c5ae07.tres"]
+
+[params]
+
+chunk_size=Vector2i(512, 288)
+background_color=Color(0, 0, 0, 1)

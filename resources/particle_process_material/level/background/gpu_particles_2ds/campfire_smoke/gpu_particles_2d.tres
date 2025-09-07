@@ -1,0 +1,41 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=5 format=3 uid="uid://dt56b0fhokku1"]
+
+[sub_resource type="Curve" id="Curve_wfddu"]
+_data = [Vector2(0, 0.452632), 0.0, 0.0, 0, 0, Vector2(0.0558659, 0.705263), 2.93099, 2.93099, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wln57"]
+curve = SubResource("Curve_wfddu")
+
+[sub_resource type="Curve" id="Curve_ojwyq"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 1.05165, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cki8d"]
+curve = SubResource("Curve_ojwyq")
+
+[resource]
+lifetime_randomness = 0.2
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 30.0
+initial_velocity_max = 40.0
+angular_velocity_min = -10.0
+angular_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_curve = SubResource("CurveTexture_wln57")
+anim_offset_max = 1.0
+turbulence_enabled = true
+turbulence_noise_speed = Vector3(1, 0, 0)
+turbulence_influence_min = 0.03
+turbulence_influence_max = 0.06
+turbulence_influence_over_life = SubResource("CurveTexture_cki8d")
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+collision_use_scale = true

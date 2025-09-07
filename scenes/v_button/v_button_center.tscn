@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh7ll1okswymd"]
+
+[ext_resource type="PackedScene" uid="uid://xfb1md2n7sru" path="res://scenes/v_button/v_button.tscn" id="1_xwegq"]
+[ext_resource type="Script" path="res://scripts/v_button/button_center.gd" id="3_87cw1"]
+[ext_resource type="Texture2D" uid="uid://vdrtt3i0vkkw" path="res://textures/v_button/arrow.png" id="4_63d0q"]
+
+[node name="VButtonCenter" instance=ExtResource("1_xwegq")]
+offset_right = 2.0
+offset_bottom = 6.0
+size_flags_horizontal = 4
+shortcut = null
+
+[node name="Button" parent="." index="0"]
+script = ExtResource("3_87cw1")
+focus_tween_value = -3
+focus_tween_duration = 0.1
+focus_tween_property = "position:y"
+
+[node name="0" parent="Control/Arrows" index="0"]
+offset_left = -14.0
+offset_top = 3.0
+offset_right = -6.0
+offset_bottom = 13.0
+
+[node name="1" type="TextureRect" parent="Control/Arrows" index="1"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 14.0
+offset_bottom = 13.0
+grow_horizontal = 0
+texture = ExtResource("4_63d0q")
+stretch_mode = 5
+flip_h = true
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="button_up" from="Button" to="Button" method="_on_button_up"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://dasqgvsn22g0r"]
+
+[ext_resource type="Shader" path="res://shaders/water/shader_rect.gdshader" id="1_xc248"]
+[ext_resource type="Script" path="res://scripts/water/shader_rect.gd" id="2_qlwlv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_brvr2"]
+resource_local_to_scene = true
+seed = 1943763829
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_33bax"]
+resource_local_to_scene = true
+width = 128
+height = 128
+seamless = true
+seamless_blend_skirt = 0.25
+noise = SubResource("FastNoiseLite_brvr2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0844m"]
+resource_local_to_scene = true
+shader = ExtResource("1_xc248")
+shader_parameter/size = Vector2(8, 8)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_33bax")
+
+[node name="ShaderRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_0844m")
+offset_right = 8.0
+offset_bottom = 8.0
+size_flags_horizontal = 4
+script = ExtResource("2_qlwlv")

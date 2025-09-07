@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://xfb1md2n7sru"]
+
+[ext_resource type="Script" path="res://scripts/v_button/v_button.gd" id="2_n0guq"]
+[ext_resource type="AudioStream" uid="uid://djhjldu5f0k7t" path="res://streams/v_button/stream_focus.wav" id="3_d5rdb"]
+[ext_resource type="Script" path="res://scripts/v_button/button.gd" id="3_jadbq"]
+[ext_resource type="AudioStream" uid="uid://btv5omer81ma5" path="res://streams/v_button/stream_pressed.wav" id="4_72w4v"]
+[ext_resource type="Script" path="res://scripts/v_button/arrows.gd" id="4_il2qn"]
+[ext_resource type="Texture2D" uid="uid://vdrtt3i0vkkw" path="res://textures/v_button/arrow.png" id="5_jsiyh"]
+
+[node name="VButton" type="MarginContainer"]
+offset_right = 3.0
+offset_bottom = 9.0
+size_flags_horizontal = 0
+script = ExtResource("2_n0guq")
+stream_focus = ExtResource("3_d5rdb")
+stream_pressed = ExtResource("4_72w4v")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+shortcut_in_tooltip = false
+script = ExtResource("3_jadbq")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Arrows" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("4_il2qn")
+
+[node name="0" type="TextureRect" parent="Control/Arrows"]
+layout_mode = 1
+offset_left = -8.0
+offset_top = 6.0
+offset_bottom = 16.0
+texture = ExtResource("5_jsiyh")
+stretch_mode = 5
+
+[connection signal="button_down" from="Button" to="." method="emit_signal" binds= ["button_down"]]
+[connection signal="button_up" from="Button" to="." method="emit_signal" binds= ["button_up"]]
+[connection signal="focus_entered" from="Button" to="." method="_on_button_focus_entered" flags=3]
+[connection signal="focus_entered" from="Button" to="Button" method="_on_focus_entered"]
+[connection signal="focus_entered" from="Button" to="Control/Arrows" method="show"]
+[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="focus_exited" from="Button" to="Button" method="_on_focus_exited"]
+[connection signal="focus_exited" from="Button" to="Control/Arrows" method="hide"]
+[connection signal="pressed" from="Button" to="." method="emit_signal" binds= ["pressed"]]
+[connection signal="toggled" from="Button" to="." method="signal_emit" binds= ["toggled"]]

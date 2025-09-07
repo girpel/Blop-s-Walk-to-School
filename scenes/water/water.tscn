@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=3 uid="uid://blsofa35vvk41"]
+
+[ext_resource type="PackedScene" uid="uid://bopcm6dahd10d" path="res://scenes/water/area_2d.tscn" id="1_akp7n"]
+[ext_resource type="Script" path="res://scripts/water/edge_collision_shape_2d.gd" id="1_pl44k"]
+[ext_resource type="Script" path="res://scripts/water/mask.gd" id="4_2bpr4"]
+[ext_resource type="Shader" path="res://shaders/water/shader_rect.gdshader" id="4_gvtfc"]
+[ext_resource type="Texture2D" uid="uid://datiju4iey5vs" path="res://textures/water/bubble.png" id="5_k6k7o"]
+[ext_resource type="Script" path="res://scripts/base/gpu_particles_2d_instance.gd" id="6_nkfia"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5wkia"]
+resource_local_to_scene = true
+b = Vector2(8, 0)
+
+[sub_resource type="Curve" id="Curve_umyua"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_cepg3"]
+curve = SubResource("Curve_umyua")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_41ybm"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(3, 0, 0)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 35.0
+initial_velocity_max = 45.0
+gravity = Vector3(0, 120, 0)
+scale_min = 0.75
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_cepg3")
+turbulence_noise_strength = 8.65
+turbulence_noise_speed_random = 4.76
+turbulence_influence_min = 0.44
+turbulence_influence_max = 0.52
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5txna"]
+resource_local_to_scene = true
+closed = false
+polygon = PackedVector2Array(0, 0, 8, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ed6l"]
+resource_local_to_scene = true
+size = Vector2(8, 8)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_286x7"]
+seed = 463185929
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_alkdg"]
+width = 128
+height = 128
+seamless = true
+seamless_blend_skirt = 0.25
+noise = SubResource("FastNoiseLite_286x7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_03k0v"]
+resource_local_to_scene = true
+shader = ExtResource("4_gvtfc")
+shader_parameter/size = Vector2(8, 8)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_alkdg")
+
+[node name="Water" type="Node2D"]
+
+[node name="Edge" type="Area2D" parent="."]
+collision_layer = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Edge"]
+shape = SubResource("SegmentShape2D_5wkia")
+script = ExtResource("1_pl44k")
+springs_size = 1
+springs_difference = 8
+points = Array[Vector2]([Vector2(0, 0), Vector2(8, 0)])
+metadata/_edit_lock_ = true
+
+[node name="Mask" type="Node2D" parent="Edge/CollisionShape2D"]
+process_mode = 4
+z_index = -1
+script = ExtResource("4_2bpr4")
+metadata/_edit_lock_ = true
+
+[node name="Bubbles" type="GPUParticles2D" parent="Edge/CollisionShape2D"]
+process_mode = 4
+texture_filter = 1
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_41ybm")
+texture = ExtResource("5_k6k7o")
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-1, -1, 2, 2)
+script = ExtResource("6_nkfia")
+metadata/_edit_lock_ = true
+
+[node name="BubblesDelay" type="Timer" parent="Edge/CollisionShape2D"]
+wait_time = 0.25
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Edge/CollisionShape2D"]
+occluder = SubResource("OccluderPolygon2D_5txna")
+occluder_light_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="Area2D" parent="." instance=ExtResource("1_akp7n")]
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_7ed6l")
+
+[node name="ShaderBuffer" parent="Area2D/CollisionShape2D/CanvasLayer" index="0"]
+material = SubResource("ShaderMaterial_03k0v")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+rect = Rect2(0, 0, 2, 2)
+
+[connection signal="body_entered" from="Edge" to="Edge/CollisionShape2D" method="_on_edge_body_entered"]
+[connection signal="body_exited" from="Edge" to="Edge/CollisionShape2D" method="_on_edge_body_exited"]
+[connection signal="timeout" from="Edge/CollisionShape2D/BubblesDelay" to="Edge/CollisionShape2D" method="_on_bubbles_delay_timeout"]
+
+[editable path="Area2D"]

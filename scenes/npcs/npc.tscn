@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfrh8i81qlp15"]
+
+[ext_resource type="Script" path="res://scripts/npcs/npc.gd" id="1_eqc1t"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fixih"]
+resource_local_to_scene = true
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 24.0
+}]
+
+[node name="NPC" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_fixih")
+autoplay = "default"
+script = ExtResource("1_eqc1t")

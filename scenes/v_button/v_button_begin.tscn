@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvfsgdx46wmjd"]
+
+[ext_resource type="PackedScene" uid="uid://xfb1md2n7sru" path="res://scenes/v_button/v_button.tscn" id="1_uimwg"]
+
+[node name="VButton" instance=ExtResource("1_uimwg")]
+
+[node name="Button" parent="." index="0"]
+alignment = 0
+focus_tween_value = 6
+focus_tween_duration = 0.1
+focus_tween_property = "position:x"

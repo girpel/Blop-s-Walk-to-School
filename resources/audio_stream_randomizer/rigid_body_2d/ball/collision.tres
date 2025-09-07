@@ -1,0 +1,8 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=2 format=3 uid="uid://beb676vyhciep"]
+
+[ext_resource type="AudioStream" uid="uid://r35q2le32ufl" path="res://streams/v_button/rigid_body_2d/ball/collision.wav" id="1_y8s60"]
+
+[resource]
+streams_count = 1
+stream_0/stream = ExtResource("1_y8s60")
+stream_0/weight = 1.0

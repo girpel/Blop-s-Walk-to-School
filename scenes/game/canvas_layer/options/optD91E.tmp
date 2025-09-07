@@ -1,0 +1,336 @@
+[gd_scene load_steps=15 format=3 uid="uid://ca7v8y42lkw0"]
+
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="1_byabl"]
+[ext_resource type="Texture2D" uid="uid://dl01v1ygsdvb5" path="res://textures/options/title_options.png" id="2_o4e3u"]
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="4_ja2gs"]
+[ext_resource type="Texture2D" uid="uid://cyd4mulh7y0w3" path="res://textures/options/title_video.png" id="5_4f8vy"]
+[ext_resource type="Texture2D" uid="uid://1b22cssfy5fm" path="res://textures/options/title_controls.png" id="5_ncsx5"]
+[ext_resource type="PackedScene" uid="uid://b5ywvx3kc248" path="res://scenes/options/menu_select.tscn" id="5_owlpj"]
+[ext_resource type="Texture2D" uid="uid://j4t3oisouyue" path="res://textures/options/title_audio.png" id="5_r5jrd"]
+[ext_resource type="PackedScene" uid="uid://fueam5jlhlbt" path="res://scenes/v_button/v_button_center_extend_select.tscn" id="7_vifab"]
+[ext_resource type="PackedScene" uid="uid://clkrexbekshb7" path="res://scenes/options/menu.tscn" id="9_77115"]
+[ext_resource type="PackedScene" uid="uid://b5jok6oanbixb" path="res://scenes/v_button/v_button_center_extend_input_keyboard.tscn" id="10_do4aw"]
+[ext_resource type="Texture2D" uid="uid://b2ky6ja5pckpk" path="res://textures/options/title_keyboard.png" id="10_frnwg"]
+[ext_resource type="Script" path="res://scripts/v_button/v_buttons_container/v_container.gd" id="11_172yu"]
+[ext_resource type="Script" path="res://scripts/v_button/v_buttons_container/v_buttons_containers_h_container.gd" id="11_war6k"]
+[ext_resource type="Script" path="res://scripts/v_button/v_buttons_container/v_buttons_container.gd" id="12_r6ogb"]
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 544.0
+offset_bottom = 288.0
+theme = ExtResource("1_byabl")
+
+[node name="Main" parent="." instance=ExtResource("9_77115")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.5
+offset_top = -70.0
+offset_right = 88.5
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="Main" index="0"]
+texture = ExtResource("2_o4e3u")
+
+[node name="Controls" parent="Main/VButtonsContainer" index="0" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "CONTROLS"
+
+[node name="Video" parent="Main/VButtonsContainer" index="1" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "VIDEO"
+
+[node name="Audio" parent="Main/VButtonsContainer" index="2" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "AUDIO"
+
+[node name="Controls" parent="." instance=ExtResource("5_owlpj")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -106.0
+offset_right = 110.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="Controls" index="0"]
+texture = ExtResource("5_ncsx5")
+
+[node name="MoveToggle" parent="Controls/VButtonsContainer" index="0" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["HOLD", "TOGGLE"])
+selection_custom_minimum_size_x = 64
+selection_wrap = true
+text = "MOVE"
+
+[node name="CrouchToggle" parent="Controls/VButtonsContainer" index="1" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["HOLD", "TOGGLE"])
+selection_custom_minimum_size_x = 64
+selection_wrap = true
+text = "CROUCH"
+
+[node name="JumpHeight" parent="Controls/VButtonsContainer" index="2" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["VARIED", "UNIFORM"])
+selection_custom_minimum_size_x = 74
+selection_wrap = true
+text = "JUMP HEIGHT"
+
+[node name="Keyboard" parent="Controls/VButtonsContainer" index="3" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "KEYBOARD"
+
+[node name="Controller" parent="Controls/VButtonsContainer" index="4" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "CONTROLLER"
+
+[node name="Video" parent="." instance=ExtResource("5_owlpj")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -146.0
+offset_top = -106.0
+offset_right = 146.0
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="Video" index="0"]
+texture = ExtResource("5_4f8vy")
+
+[node name="ColorPalette" parent="Video/VButtonsContainer" index="0" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["CLASSIC"])
+selection_wrap = true
+text = "COLOR PALETTE"
+
+[node name="WindowMode" parent="Video/VButtonsContainer" index="1" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["FULLSCREEN", "WINDOWED", "BORDERLESS"])
+selection_custom_minimum_size_x = 104
+selection_wrap = true
+text = "WINDOW MODE"
+
+[node name="WindowScale" parent="Video/VButtonsContainer" index="2" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["1", "2", "3", "4", "5"])
+selection_custom_minimum_size_x = 14
+text = "WINDOW SCALE"
+
+[node name="WindowSafeArea" parent="Video/VButtonsContainer" index="3" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5"])
+selection_custom_minimum_size_x = 14
+text = "WINDOW SAFE AREA"
+
+[node name="VerticalSync" parent="Video/VButtonsContainer" index="4" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["ON", "OFF"])
+selection_custom_minimum_size_x = 33
+selection_wrap = true
+text = "VERTICAL SYNC"
+
+[node name="Audio" parent="." instance=ExtResource("5_owlpj")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.0
+offset_top = -94.0
+offset_right = 99.0
+offset_bottom = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" parent="Audio" index="0"]
+texture = ExtResource("5_r5jrd")
+
+[node name="Master" parent="Audio/VButtonsContainer" index="0" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "MASTER"
+
+[node name="Ambience" parent="Audio/VButtonsContainer" index="1" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "AMBIENCE
+"
+
+[node name="SoundEffects" parent="Audio/VButtonsContainer" index="2" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "SOUND EFFECTS"
+
+[node name="UserInterface" parent="Audio/VButtonsContainer" index="3" instance=ExtResource("7_vifab")]
+layout_mode = 2
+selections = Array[String](["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
+selection_index_start = 10
+selection_custom_minimum_size_x = 20
+text = "USER INTERFACE"
+
+[node name="Keyboard" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -120.0
+offset_right = 210.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 13
+alignment = 1
+
+[node name="Title" type="TextureRect" parent="Keyboard"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+texture = ExtResource("10_frnwg")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VButtonsContainers" type="VBoxContainer" parent="Keyboard"]
+layout_mode = 2
+script = ExtResource("11_172yu")
+
+[node name="VInputsContainers" type="HBoxContainer" parent="Keyboard/VButtonsContainers"]
+layout_mode = 2
+theme_override_constants/separation = 28
+alignment = 1
+script = ExtResource("11_war6k")
+
+[node name="Gameplay" type="VBoxContainer" parent="Keyboard/VButtonsContainers/VInputsContainers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("12_r6ogb")
+
+[node name="MoveLeft" parent="Keyboard/VButtonsContainers/VInputsContainers/Gameplay" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"move_left"
+text = "LEFT"
+
+[node name="MoveRight" parent="Keyboard/VButtonsContainers/VInputsContainers/Gameplay" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"move_right"
+text = "RIGHT"
+
+[node name="Jump" parent="Keyboard/VButtonsContainers/VInputsContainers/Gameplay" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"jump"
+text = "JUMP
+"
+
+[node name="Crouch" parent="Keyboard/VButtonsContainers/VInputsContainers/Gameplay" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"crouch"
+text = "CROUCH"
+
+[node name="Interact" parent="Keyboard/VButtonsContainers/VInputsContainers/Gameplay" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"interact"
+text = "INTERACT"
+
+[node name="WallJumpUp" parent="Keyboard/VButtonsContainers/VInputsContainers/Gameplay" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"wall_jump_up"
+text = "UP WALL JUMP"
+
+[node name="UI" type="VBoxContainer" parent="Keyboard/VButtonsContainers/VInputsContainers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
+script = ExtResource("12_r6ogb")
+
+[node name="Left" parent="Keyboard/VButtonsContainers/VInputsContainers/UI" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"ui_left"
+text = "LEFT"
+
+[node name="Right" parent="Keyboard/VButtonsContainers/VInputsContainers/UI" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"ui_right"
+text = "RIGHT"
+
+[node name="Up" parent="Keyboard/VButtonsContainers/VInputsContainers/UI" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"ui_up"
+text = "UP"
+
+[node name="Down" parent="Keyboard/VButtonsContainers/VInputsContainers/UI" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"ui_down"
+text = "DOWN"
+
+[node name="Select" parent="Keyboard/VButtonsContainers/VInputsContainers/UI" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"ui_select"
+text = "SELECT"
+
+[node name="Back" parent="Keyboard/VButtonsContainers/VInputsContainers/UI" instance=ExtResource("10_do4aw")]
+layout_mode = 2
+action = &"ui_cancel"
+text = "BACK"
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Keyboard/VButtonsContainers"]
+layout_mode = 2
+script = ExtResource("12_r6ogb")
+
+[node name="ResetDefaults" parent="Keyboard/VButtonsContainers/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "RESET DEFAULTS"
+
+[node name="Back" parent="Keyboard/VButtonsContainers/VButtonsContainer" instance=ExtResource("4_ja2gs")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("1_byabl")
+text = "BACK"
+
+[editable path="Main"]
+[editable path="Controls"]
+[editable path="Video"]
+[editable path="Audio"]

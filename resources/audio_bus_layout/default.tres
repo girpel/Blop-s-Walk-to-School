@@ -1,0 +1,69 @@
+[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://bhm4phvachaic"]
+
+[ext_resource type="Script" path="res://scripts/base/audio_effect_filter_tween.gd" id="1_q6nix"]
+[ext_resource type="Script" path="res://scripts/base/audio_effect_reverb_tween.gd" id="2_rw556"]
+
+[sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_i8vvg"]
+resource_name = "LowPassFilter"
+cutoff_hz = 20500.0
+resonance = 0.1
+script = ExtResource("1_q6nix")
+cutoff_hz_in = 1400
+tween_duration = 0.2
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_ogo01"]
+resource_name = "Reverb"
+room_size = 0.1
+wet = 0.0
+script = ExtResource("2_rw556")
+dry_in = 0.8
+wet_in = 0.4
+tween_duration = 0.5
+
+[resource]
+bus/1/name = &"UI"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/2/name = &"Water"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = true
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectLowPassFilter_i8vvg")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectReverb_ogo01")
+bus/2/effect/1/enabled = true
+bus/3/name = &"Sound Effects"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Water"
+bus/4/name = &"Ambience"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Water"
+bus/5/name = &"Ambience Default"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = -80.0
+bus/5/send = &"Ambience"
+bus/6/name = &"Ambience Outside"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = &"Ambience Default"
+bus/7/name = &"Ambience Inside"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0
+bus/7/send = &"Ambience Default"

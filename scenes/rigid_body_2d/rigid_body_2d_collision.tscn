@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://nhbmk7k8jijc"]
+
+[ext_resource type="PackedScene" uid="uid://cx2qr7g3hrs7d" path="res://scenes/rigid_body_2d/rigid_body_2d.tscn" id="1_fuhvb"]
+[ext_resource type="Script" path="res://scripts/rigid_body_2d/rigid_body_2d_collision.gd" id="2_bhk8q"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tky1n"]
+resource_local_to_scene = true
+friction = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbllw"]
+resource_local_to_scene = true
+size = Vector2(8, 8)
+
+[node name="RigidBody2DCollision" instance=ExtResource("1_fuhvb")]
+physics_material_override = SubResource("PhysicsMaterial_tky1n")
+script = ExtResource("2_bhk8q")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("RectangleShape2D_wbllw")
+
+[node name="Collision" type="AudioStreamPlayer2D" parent="." index="2"]
+bus = &"Sound Effects"
+metadata/_edit_lock_ = true

@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://bawgusv8vy2hf"]
+
+[ext_resource type="PackedScene" uid="uid://coatptvl52lbi" path="res://scenes/game/canvas_layer/options/submenu.tscn" id="1_pccrr"]
+[ext_resource type="PackedScene" uid="uid://bh7ll1okswymd" path="res://scenes/v_button/v_button_center.tscn" id="2_yl8qg"]
+[ext_resource type="Theme" uid="uid://ddlm8qsfiblqo" path="res://resources/themes/default.tres" id="3_5jqje"]
+[ext_resource type="Script" path="res://scripts/game/canvas_layer/options/reset_defaults.gd" id="4_aypdw"]
+
+[node name="SubmenuSelect" instance=ExtResource("1_pccrr")]
+
+[node name="ResetDefaults" parent="VButtonsContainer" index="0" instance=ExtResource("2_yl8qg")]
+custom_minimum_size = Vector2(3, 9)
+layout_mode = 2
+theme = ExtResource("3_5jqje")
+script = ExtResource("4_aypdw")
+v_buttons_containers_paths = Array[NodePath]([NodePath("..")])
+text = "RESET DEFAULTS"
