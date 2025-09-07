@@ -3,5 +3,5 @@
 
 export_presets.cfg
 
-textures\level\background\world
-textures\level\foreground\world
+textures/level/background/world
+textures/level/foreground/world
