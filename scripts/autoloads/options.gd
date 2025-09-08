@@ -4,6 +4,7 @@ signal window_mode_changed (window_mode: DisplayServer.WindowMode)
 signal color_palette_changed (colors: Array)
 signal particles_collisions_changed (enabled: bool)
 signal water_shader_visiblilty_changed (visible: bool)
+signal controller_index_changed (index: int)
 
 const _COLOR_PALETTES: Array[Array] = [
 	[Color("000000"), Color("ffffff")],
@@ -30,8 +31,6 @@ const _AUDIO_SELECTION_SIZE := 10.0
 
 var jump_hold := false
 var jump_uniform := false
-
-var controller_index := 0
 
 var window_mode: DisplayServer.WindowMode : set = _window_mode_set
 var _window_size: Vector2i : set = _window_size_set
@@ -173,6 +172,6 @@ func _on_user_interface_selection_changed(selection_index: int) -> void:
 
 func _on_controller_selection_changed(selection_index: int) -> void:
 	
-	controller_index = selection_index
+	controller_index_changed.emit(selection_index)
 	
 	return

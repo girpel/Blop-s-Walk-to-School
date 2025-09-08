@@ -5,9 +5,6 @@ extends "texture_rect.gd"
 func texture_set(value: Texture2D, input_index := 0) -> void:
 	return super(value, input_index)
 
-func inputs_paths_set(inputs_directory_path := keys_directory_path) -> void:
-	return super(inputs_directory_path)
-
 func event_current_data_get() -> Array:
 	return [event_current.physical_keycode]
 
@@ -37,5 +34,11 @@ func _init() -> void:
 	
 	event_datas_valid_ranges = {1: [[4194305, 4194367], [4194433, 4194448], [4194370, 4194372], [4194373, 4194374], [4194376, 4194383], [4194388, 4194420], [32, 97], [123, 127], [165, 166], [167, 168]]}
 	input_events = {"InputEventKey": [key_pressed_get, key_path_get]}
+	
+	return
+
+func _ready() -> void:
+	
+	inputs_paths_set(keys_directory_path)
 	
 	return

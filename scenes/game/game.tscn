@@ -117,7 +117,6 @@ shader_parameter/color_1 = Color(1, 1, 1, 1)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_8jyms")
-web_export = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 512.0
@@ -207,10 +206,8 @@ layout_mode = 2
 text = "CREDITS"
 
 [node name="QuitGame" parent="CanvasLayer/TitleScreen/VButtonsContainer" instance=ExtResource("8_5lkjj")]
-visible = false
 layout_mode = 2
 text = "QUIT GAME"
-disabled = true
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer"]
 process_mode = 4
@@ -267,10 +264,8 @@ layout_mode = 2
 text = "TITLE SCREEN"
 
 [node name="QuitGame" parent="CanvasLayer/PauseMenu/Submenu/VButtonsContainer" index="3" instance=ExtResource("13_hytw8")]
-visible = false
 layout_mode = 2
 text = "QUIT GAME"
-disabled = true
 
 [node name="Options" type="Control" parent="CanvasLayer"]
 process_mode = 4
@@ -406,23 +401,19 @@ selection_wrap = true
 text = "COLOR PALETTE"
 
 [node name="WindowMode" parent="CanvasLayer/Options/Video/VButtonsContainer" index="1" instance=ExtResource("16_cjnrf")]
-visible = false
 custom_minimum_size = Vector2(42, 0)
 layout_mode = 2
 selections = Array[String](["FULLSCREEN", "WINDOWED"])
 selection_custom_minimum_size_x = 104
 selection_wrap = true
 text = "WINDOW MODE"
-disabled = true
 
 [node name="WindowScale" parent="CanvasLayer/Options/Video/VButtonsContainer" index="2" instance=ExtResource("16_cjnrf")]
-visible = false
 layout_mode = 2
 script = ExtResource("23_iu5q0")
 selections = Array[String](["1", "2", "3", "4"])
 selection_index_start = 1
 text = "WINDOW SCALE"
-disabled = true
 
 [node name="ParticleCollisions" parent="CanvasLayer/Options/Video/VButtonsContainer" index="3" instance=ExtResource("16_cjnrf")]
 custom_minimum_size = Vector2(42, 0)
@@ -592,10 +583,12 @@ action = &"ui_pause"
 text = "PAUSE"
 
 [node name="Fullscreen" parent="CanvasLayer/Options/Keyboard/Menu/VButtons/UI/VButtonsContainer" index="7" instance=ExtResource("21_1ly1i")]
+visible = false
 custom_minimum_size = Vector2(108, 0)
 layout_mode = 2
 action = &"fullscreen"
 text = "FULLSCREEN"
+disabled = true
 
 [node name="Controller" parent="CanvasLayer/Options" instance=ExtResource("19_tfhdm")]
 visible = false
@@ -685,10 +678,12 @@ action = &"ui_back"
 text = "BACK"
 
 [node name="Fullscreen" parent="CanvasLayer/Options/Controller/Menu/VButtons/UI/VButtonsContainer" index="6" instance=ExtResource("23_dgaun")]
+visible = false
 custom_minimum_size = Vector2(267, 0)
 layout_mode = 2
 action = &"fullscreen"
 text = "FULLSCREEN"
+disabled = true
 
 [node name="Controller" parent="CanvasLayer/Options/Controller/Menu/VButtons/VButtonsContainer" index="0" instance=ExtResource("16_cjnrf")]
 custom_minimum_size = Vector2(42, 0)
@@ -972,8 +967,8 @@ script = ExtResource("24_qji44")
 [connection signal="return_reset" from="CanvasLayer/Credits" to="." method="_on_ambience_default_fade"]
 [connection signal="return_reset" from="CanvasLayer/Credits" to="CanvasLayer/TitleScreen" method="_on_reenter"]
 [connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/Return" to="CanvasLayer/TitleScreen" method="transition"]
-[connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/Return" to="CanvasLayer/Credits" method="_on_return_pressed"]
 [connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/Return" to="CanvasLayer/Credits" method="hide"]
+[connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/Return" to="CanvasLayer/Credits" method="_on_return_pressed"]
 [connection signal="pressed" from="CanvasLayer/Credits/VBoxContainer/Return" to="CanvasLayer/Credits" method="set_process_mode" binds= [4]]
 [connection signal="mouse_pressed" from="CanvasLayer/Prescreen" to="." method="_on_ambience_default_fade"]
 [connection signal="mouse_pressed" from="CanvasLayer/Prescreen" to="CanvasLayer/TitleScreen" method="emit_signal" binds= ["entered"]]

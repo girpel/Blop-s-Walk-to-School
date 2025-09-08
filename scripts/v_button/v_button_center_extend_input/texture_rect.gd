@@ -24,7 +24,7 @@ func texture_set(value: Texture2D, input_index := -1) -> void:
 func inputs_paths_get(inputs_directory_path: String) -> Array[String]:
 	return [inputs_directory_path + "/%s.png"]
 
-func inputs_paths_set(inputs_directory_path := "") -> void:
+func inputs_paths_set(inputs_directory_path: String) -> void:
 	
 	inputs_paths = inputs_paths_get(inputs_directory_path)
 	
@@ -104,12 +104,6 @@ func input_update(event: InputEvent) -> void:
 			event_current_change(event, input_event)
 			
 			return
-	
-	return
-
-func _ready() -> void:
-	
-	inputs_paths_set()
 	
 	return
 

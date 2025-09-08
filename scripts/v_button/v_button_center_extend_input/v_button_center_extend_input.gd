@@ -50,6 +50,8 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
+	await owner.ready
+	
 	options_save_file_load()
 	
 	return

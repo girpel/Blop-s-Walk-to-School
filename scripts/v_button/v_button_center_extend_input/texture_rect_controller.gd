@@ -2,9 +2,7 @@ extends "texture_rect.gd"
 
 @export var inputs_directory_paths: Array[String]
 
-var inputs_directories_paths_index := 0 
 var inputs_paths_default: Array[String]
-
 var axis_pressed := false
 
 func texture_set(value: Texture2D, input_index := 1) -> void:
@@ -15,9 +13,6 @@ func inputs_paths_get(inputs_directory_path: String) -> Array[String]:
 	var inputs_path := super(inputs_directory_path)[0]
 	
 	return [inputs_path % "a_%d%d", inputs_path % "b_%d"]
-
-func inputs_paths_set(inputs_directory_path := inputs_directory_paths[inputs_directories_paths_index]) -> void:
-	return super(inputs_directory_path)
 
 func input_path_get(inputs_path_index: int, input_name: Array) -> String:
 	
@@ -34,7 +29,6 @@ func event_current_data_get() -> Array:
 		return [event_current.button_index]
 	
 	return [event_current.axis, event_current.axis_value]
-
 
 func event_current_load(event_data: Array) -> Error:
 	
@@ -78,24 +72,6 @@ func button_pressed_get(event: InputEventJoypadButton) -> bool:
 func button_path_get(event: InputEventJoypadButton) -> String:
 	return input_path_get(1, [event.button_index])
 
-func inputs_directories_paths_index_update() -> void:
-	
-	if inputs_directories_paths_index == Options.controller_index:
-		return
-	
-	inputs_directories_paths_index = Options.controller_index
-	inputs_paths_set()
-	
-	if not event_current:
-		return
-	
-	for input_event in input_events:
-		
-		if event_current.is_class(input_event):
-			texture_set(load(input_events[input_event][1].call(event_current)))
-	
-	return
-
 func input_event_axis_update(event: InputEvent) -> void:
 	
 	if not axis_pressed:
@@ -133,14 +109,8 @@ func _init() -> void:
 
 func _ready() -> void:
 	
+	Options.controller_index_changed.connect(_on_options_controller_index_changed)
 	inputs_paths_default = inputs_paths_get(inputs_directory_paths[0])
-	
-	inputs_directories_paths_index_update()
-	return super()
-
-func _process(_delta: float) -> void:
-	
-	inputs_directories_paths_index_update()
 	
 	return
 
@@ -148,5 +118,19 @@ func _input(event: InputEvent) -> void:
 	
 	super(event)
 	input_event_axis_update(event)
+	
+	return
+
+func _on_options_controller_index_changed(controller_index: int) -> void:
+	
+	inputs_paths_set(inputs_directory_paths[controller_index])
+	
+	if not event_current:
+		return
+	
+	for input_event in input_events:
+		
+		if event_current.is_class(input_event):
+			texture_set(load(input_events[input_event][1].call(event_current)))
 	
 	return
